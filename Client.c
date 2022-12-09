@@ -43,10 +43,13 @@ char* http_parsing(char *argv[]){
           } 
           else {
             if (argv[i][j] == ':') { // check if there is a spacifec port.
-              whlie(argv[i][j] != '/') {
+              whlie(argv[i][j] != '/'){
                 strcat(port, argv[i][j]);
                 j++;
               }
+            }
+            else{/*adds the value of the path to the placeholder char* path*/
+              strcpy(path,argv[i][j]);
             }
           }
         }
@@ -57,7 +60,8 @@ char* http_parsing(char *argv[]){
         } else if (check_next == 1) {
           if (argv[i][j] == 'r' && number_of_parameters != -1) {
             flag_r = 1;
-          } else if (argv[i][j] == 'p') {
+          } 
+          else if (argv[i][j] == 'p') {
             flag_p = 1;
           }
           check_next = 0;
