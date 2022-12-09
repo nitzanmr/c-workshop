@@ -34,22 +34,29 @@ char* http_parsing(char *argv[]){
         for (int j = 0; argv[i][j] != NULL; j++) {
           if (flag_in_url == 1) {
             /// runs while in the url and adds to the *url and to *check_com.
-            strcat(url, argv[i][j]);
-            strcat(check_com, argv[i][j]);
+            strncat(url, argv[i][j],1);
+            if(strlen(check_com)>=4){
+              /*checks if the number of values in check_com is more than 4 to delete the first one and add the new one to the end*/
+              for (int i = 0; i < 4; i++)
+              {
+                check_com[i] = check_com[i+1];
+              }
+            }
+            strncat(check_com, argv[i][j],1);
             if (strcmp(check_com, ".com")) {
               // checks if we are at the end of the url.
               flag_in_url = 0;
             }
           } 
           else {
-            if (argv[i][j] == ':') { // check if there is a spacifec port.
+            if (argv[i][j] == ':') { // check if there is a spacific port.
               whlie(argv[i][j] != '/'){
-                strcat(port, argv[i][j]);
+                strncat(port, argv[i][j],1);
                 j++;
               }
             }
             else{/*adds the value of the path to the placeholder char* path*/
-              strcpy(path,argv[i][j]);
+              strncat(path,argv[i][j],1);
             }
           }
         }
