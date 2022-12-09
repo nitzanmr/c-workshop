@@ -21,7 +21,8 @@ char* http_parsing(char *argv[]){
       flag_r = 0;
     } 
     else if (number_of_parameters >= 1) {
-      strcat(parmeters_of_r, strcat(argv[i] + '&'));
+      strcat(argv[i] , '&');
+      strcat(parmeters_of_r, argv[i]);
       ///check for the parameters of -r
       number_of_parameters--;
       if (number_of_parameters == 0)///for making it not possible to enter -r twice.
