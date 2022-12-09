@@ -16,12 +16,13 @@ char* http_parsing(char *argv[]) {
     //   argv[i]
     // }
     if (flag_r == 1) {
-      number_of_parameters = atoi(argv[i]);
+      number_of_parameters = atoi(argv[i]);///enter the number of parameters into placeholder
       flag_r = 0;
     } else if (number_of_parameters >= 1) {
       strcat(parmeters_of_r, strcat(argv[i] + '&'));
+      ///check for the parameters of -r
       number_of_parameters--;
-      if (number_of_parameters == 0)
+      if (number_of_parameters == 0)///for making it not possible to enter -r twice.
         number_of_parameters = -1;
     } else {
       if(strstr(argv[i],"http://"){
