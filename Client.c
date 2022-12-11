@@ -63,7 +63,7 @@ char** http_parsing(char *argv[]){
         for (int j = 0; argv[i][j] != NULL; j++) {
           if (flag_in_url == 1) {
             /// runs while in the url and adds to the *url and to *check_com.
-            strncat(url, argv[i][j],1);
+            strncat(new_client->url, &argv[i][j],1);
             if(strlen(check_com)>=4){
               /*checks if the number of values in check_com is more than 4 to delete the first one and add the new one to the end*/
               for (int i = 0; i < 4; i++)
@@ -71,7 +71,7 @@ char** http_parsing(char *argv[]){
                 check_com[i] = check_com[i+1];
               }
             }
-            strncat(check_com, argv[i][j],1);
+            strncat(check_com,&argv[i][j],1);
             if (strcmp(check_com, ".com")) {
               // checks if we are at the end of the url.
               flag_in_url = 0;
@@ -81,13 +81,13 @@ char** http_parsing(char *argv[]){
             if (argv[i][j] == ':') { // check if there is a spacific port.
               char* temp_for_port = "";
               while(argv[i][j] != '/'&&argv[i][j]!=NULL){
-                strncat(temp_for_port,argv[i][j],1);
+                strncat(temp_for_port,&argv[i][j],1);
                 j++;
               }
               port = atoi(temp_for_port);
             }
             else{/*adds the value of the path to the placeholder char* path*/
-              strncat(new_client->path,argv[i][j],1);
+              strncat(new_client->path,&argv[i][j],1);
             }
           }
         }
