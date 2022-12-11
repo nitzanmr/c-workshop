@@ -1,7 +1,7 @@
 /* write parsing function that takes argv given in the main to it and parase
    it and make the http command.*/
 #include "string.h"
-
+#include "stdlib.h"
 char* http_parsing(char *argv[]){
   int flag_r = 0;
   int flag_p = 0;
@@ -9,6 +9,7 @@ char* http_parsing(char *argv[]){
   int check_next = 0;
   int number_of_parameters = 0;
   int size_of_text = 0;
+  int port = 0;
   char *url = "";/*url placement*/
   char *path = "/";/*storing place for the path*/
   char *parmeters_of_r = "?";/*Placement for the parameters of r.*/
@@ -59,10 +60,13 @@ char* http_parsing(char *argv[]){
           } 
           else {
             if (argv[i][j] == ':') { // check if there is a spacific port.
-              whlie(argv[i][j] != '/'&&argv[i][j]!=NULL){
-                strncat(port,argv[i][j],1);
+              char* temp_for_port = "";
+              whlie(argv[i][j] != '/'&&argv[i][j]!=NULL)
+              {
+                strncat(temp_for_port,argv[i][j],1);
                 j++;
-              }
+              };
+              port = atoi(temp_for_port);
             }
             else{/*adds the value of the path to the placeholder char* path*/
               strncat(path,argv[i][j],1);
