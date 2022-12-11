@@ -1,6 +1,6 @@
-#include <stdio.h>
-
+#include "Client.c"
 int main(void) {
-  printf("Hello World\n");
-  return 0;
+  char* new = "";
+  strcat(new,"a");
+  printf("%s",new);
 }

@@ -20,7 +20,7 @@ char* http_parsing(char *argv[]){
       size_of_text = atoi(argv[i]);/*checks the value of the size of the text.*/
       i++;
       if(argv[i]== NULL){/*check if the value of the text is not NULL*/
-        perror("argv[%d] is NULL",i);
+        perror("argv is null");
         exit(1);
       }
       strncat(text,argv[i],size_of_text);
@@ -31,7 +31,8 @@ char* http_parsing(char *argv[]){
       flag_r = 0;
     } 
     else if (number_of_parameters >= 1) {
-      strcat(argv[i] , '&');
+      char* and_char = "&"
+      strcat(argv[i] ,and_char);
       strcat(parmeters_of_r, argv[i]);
       ///check for the parameters of -r
       number_of_parameters--;
