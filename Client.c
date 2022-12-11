@@ -28,7 +28,7 @@ Client* http_parsing(int length_of_argv,char *argv[]){
   int check_next = 0;
   int number_of_parameters = 0;
   int size_of_text = 0;
-  int port = 0;
+  int size_of_parameters = 0;
   Client* new_client = (Client*)malloc(sizeof(Client));
   client_init(new_client);
   char *check_com = (char*)malloc(sizeof(char*));/*check for if the value inside the http:// if we arrived to the value .com*/
@@ -46,14 +46,24 @@ Client* http_parsing(int length_of_argv,char *argv[]){
     }
     if (flag_r == 1) {
       number_of_parameters = atoi(argv[i]);///enter the number of parameters into placeholder
+      for(int k =i+1;k<=i+number_of_parameters;k++){
+        for (int j = 0; argv[k][j] != NULL; j++){
+          size_of_parameters++;
+        }
+      }
+      new_client->parameters_of_r = (char*)malloc(size_of_parameters*sizeof(char));
+      new_client->parameters_of_r[0] = '?';
       flag_r = 0;
     } 
     else if (number_of_parameters >= 1) {
       char and_char = '&';
-      strncat(argv[i] ,and_char,1);
       strcat(new_client->parameters_of_r, argv[i]);
-      ///check for the parameters of -r
       number_of_parameters--;
+
+      if(number_of_parameters >= 1)
+       strncat(new_client->parameters_of_r ,&and_char,1);
+
+      ///check for the parameters of -r
       if (number_of_parameters == 0)///for making it not possible to enter -r twice.
         number_of_parameters = -1;
     } 
