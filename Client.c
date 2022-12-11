@@ -8,14 +8,23 @@ char* http_parsing(char *argv[]){
   int flag_in_url = 0;
   int check_next = 0;
   int number_of_parameters = 0;
-  char *url = "";
-  char *path = "/";
-  char *parmeters_of_r = "?";
-  char *check_com = "";
+  int size_of_text = 0;
+  char *url = "";/*url placement*/
+  char *path = "/";/*storing place for the path*/
+  char *parmeters_of_r = "?";/*Placement for the parameters of r.*/
+  char *check_com = "";/*check for if the value inside the http:// if we arrived to the value .com*/
+  char* text = "";/*placement for the text option if there is text after the value -p*/
   for (int i = 0; argv[i] != NULL; i++) {
-    // if (flag_p == 1) {
-    //   argv[i]
-    // }
+    if (flag_p == 1) {/*checks for the value of the flag of p and adds the text that comes afterwards to the */
+      size_of_text = (int)argv[i];/*checks the value of the size of the text.*/
+      i++;
+      if(argv[i]== NULL){/*check if the value of the text is not NULL*/
+        perror("argv[%d] is NULL",i);
+        exit(1);
+      }
+      strncat(text,argv[i],size_of_text);
+      flag_p=0;
+    }
     if (flag_r == 1) {
       number_of_parameters = atoi(argv[i]);///enter the number of parameters into placeholder
       flag_r = 0;
@@ -50,8 +59,8 @@ char* http_parsing(char *argv[]){
           } 
           else {
             if (argv[i][j] == ':') { // check if there is a spacific port.
-              whlie(argv[i][j] != '/'){
-                strncat(port, argv[i][j],1);
+              whlie(argv[i][j] != '/'&&argv[i][j]!=NULL){
+                strncat(port,argv[i][j],1);
                 j++;
               }
             }
@@ -61,17 +70,19 @@ char* http_parsing(char *argv[]){
           }
         }
       }
-      for (int j = 0; j <= strlen(argv[i]); j++) {
-        if (argv[i][j] == '-') {
-          check_next = 1;
-        } else if (check_next == 1) {
-          if (argv[i][j] == 'r' && number_of_parameters != -1) {
-            flag_r = 1;
-          } 
-          else if (argv[i][j] == 'p') {
-            flag_p = 1;
+      else{
+        for (int j = 0; j <= strlen(argv[i]); j++) {
+          if (argv[i][j] == '-') {
+            check_next = 1;
+          } else if (check_next == 1) {
+            if (argv[i][j] == 'r' && number_of_parameters != -1) {
+              flag_r = 1;
+            } 
+            else if (argv[i][j] == 'p') {
+              flag_p = 1;
+            }
+            check_next = 0;
           }
-          check_next = 0;
         }
       }
     }
