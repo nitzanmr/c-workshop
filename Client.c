@@ -79,12 +79,15 @@ Client* http_parsing(int length_of_argv,char *argv[]){
           } 
           else {
             if (argv[i][j] == ':'&& j>5) { // check if there is a spacific port.
-              char* temp_for_port = "";
+              char* temp_for_port = (char*)malloc(sizeof(char));
               while(argv[i][j] != '/'&&argv[i][j]!=NULL){
-                strncat(temp_for_port,&argv[i][j],1);
+                if(argv[i][j]!=':'){
+                  strncat(temp_for_port,&argv[i][j],1);
+                }
                 j++;
               }
               new_client->port = atoi(temp_for_port);
+              free(temp_for_port);
             }
             else{/*adds the value of the path to the placeholder char* path*/
               strncat(new_client->path,&argv[i][j],1);
