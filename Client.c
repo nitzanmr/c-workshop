@@ -2,7 +2,26 @@
    it and make the http command.*/
 #include "string.h"
 #include "stdlib.h"
-char* http_parsing(char *argv[]){
+struct Client
+{
+  int port;
+  int text_length;
+  char* url;
+  char* path;
+  char* parameters_of_r;
+  char* text;
+}typedef Client;
+
+void client_init(Client* new_client){
+  new_client->parameters_of_r =(char*)malloc(sizeof(char*));
+  new_client->path = (char*)malloc(sizeof(char*));
+  new_client->path[0] = '/';
+  new_client->port = 0;
+  new_client->text = (char*)malloc(sizeof(char*));
+  new_client->url = (char*)malloc(sizeof(char*));
+  new_client->text_length = 0;
+}
+char** http_parsing(char *argv[]){
   int flag_r = 0;
   int flag_p = 0;
   int flag_in_url = 0;
@@ -10,11 +29,9 @@ char* http_parsing(char *argv[]){
   int number_of_parameters = 0;
   int size_of_text = 0;
   int port = 0;
-  char *url = "";/*url placement*/
-  char *path = "/";/*storing place for the path*/
-  char *parmeters_of_r = "?";/*Placement for the parameters of r.*/
-  char *check_com = "";/*check for if the value inside the http:// if we arrived to the value .com*/
-  char* text = "";/*placement for the text option if there is text after the value -p*/
+  Client* new_client = (Client*)malloc(sizeof(Client));
+  client_init(new_client);
+  char *check_com = (char*)malloc(sizeof(char*));/*check for if the value inside the http:// if we arrived to the value .com*/
   for (int i = 0; argv[i] != NULL; i++) {
     if (flag_p == 1) {/*checks for the value of the flag of p and adds the text that comes afterwards to the */
       size_of_text = atoi(argv[i]);/*checks the value of the size of the text.*/
@@ -23,7 +40,8 @@ char* http_parsing(char *argv[]){
         perror("argv is null");
         exit(1);
       }
-      strncat(text,argv[i],size_of_text);
+      strncat(new_client->text,argv[i],size_of_text);
+      new_client->text_length = size_of_text;
       flag_p=0;
     }
     if (flag_r == 1) {
@@ -31,9 +49,9 @@ char* http_parsing(char *argv[]){
       flag_r = 0;
     } 
     else if (number_of_parameters >= 1) {
-      char* and_char = "&"
+      char* and_char = "&";
       strcat(argv[i] ,and_char);
-      strcat(parmeters_of_r, argv[i]);
+      strcat(new_client->parameters_of_r, argv[i]);
       ///check for the parameters of -r
       number_of_parameters--;
       if (number_of_parameters == 0)///for making it not possible to enter -r twice.
@@ -69,7 +87,7 @@ char* http_parsing(char *argv[]){
               port = atoi(temp_for_port);
             }
             else{/*adds the value of the path to the placeholder char* path*/
-              strncat(path,argv[i][j],1);
+              strncat(new_client->path,argv[i][j],1);
             }
           }
         }
@@ -91,4 +109,5 @@ char* http_parsing(char *argv[]){
       }
     }
   }
+
 }
