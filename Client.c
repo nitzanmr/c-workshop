@@ -16,7 +16,7 @@ char* http_parsing(char *argv[]){
   char* text = "";/*placement for the text option if there is text after the value -p*/
   for (int i = 0; argv[i] != NULL; i++) {
     if (flag_p == 1) {/*checks for the value of the flag of p and adds the text that comes afterwards to the */
-      size_of_text = (int)argv[i];/*checks the value of the size of the text.*/
+      size_of_text = atoi(argv[i]);/*checks the value of the size of the text.*/
       i++;
       if(argv[i]== NULL){/*check if the value of the text is not NULL*/
         perror("argv[%d] is NULL",i);
