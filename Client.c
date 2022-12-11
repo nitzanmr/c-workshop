@@ -61,11 +61,10 @@ char* http_parsing(char *argv[]){
           else {
             if (argv[i][j] == ':') { // check if there is a spacific port.
               char* temp_for_port = "";
-              whlie(argv[i][j] != '/'&&argv[i][j]!=NULL)
-              {
+              while(argv[i][j] != '/'&&argv[i][j]!=NULL){
                 strncat(temp_for_port,argv[i][j],1);
                 j++;
-              };
+              }
               port = atoi(temp_for_port);
             }
             else{/*adds the value of the path to the placeholder char* path*/
