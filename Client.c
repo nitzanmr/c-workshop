@@ -31,7 +31,7 @@ Client* http_parsing(int length_of_argv,char *argv[],Client* new_client){
   int check_next = 0;
   int number_of_parameters = 0;
   int size_of_text = 0;
-  int size_of_parameters = 0;
+  int size_of_parameters = 1;
   client_init(new_client);
   char *check_com = (char*)malloc(sizeof(char*));/*check for if the value inside the http:// if we arrived to the value .com*/
   for (int i = 0; i<length_of_argv; i++) {
@@ -53,8 +53,9 @@ Client* http_parsing(int length_of_argv,char *argv[],Client* new_client){
           size_of_parameters++;
         }
       }
-      new_client->parameters_of_r = (char*)malloc(size_of_parameters*sizeof(char));
+      new_client->parameters_of_r = (char*)malloc(size_of_parameters+(number_of_parameters)*sizeof(char));
       new_client->parameters_of_r[0] = '?';
+      new_client->parameters_of_r[size_of_parameters+(number_of_parameters)] = "\0";
       flag_r = 0;
     } 
     else if (number_of_parameters >= 1) {
@@ -152,9 +153,11 @@ void make_http_request(Client* new_client){
   if(new_client->parameters_of_r!=NULL)size_of_buf+2;
   buffer = (char*)malloc(size_of_buf*sizeof(char));
   hp = gethostbyname(new_client->url);
+  int fd = socket(PF_INET,SOCK_STREAM,0);
   new_socket.sin_addr.s_addr = ((struct in_addr*)(hp->h_addr_list[0]))->s_addr;
-  new_socket.sin_family = AF_INET;
-  if(connect(htons(new_client->port),(struct sockaddr*)&new_socket,sizeof(new_socket))<0)
+  new_socket.sin_family = PF_INET;
+  new_socket.sin_port = htons(new_client->port);
+  if(connect(fd,(struct sockaddr*)&new_socket,sizeof(new_socket))<0)
     {
       perror("connect");
       exit(1);
@@ -167,15 +170,16 @@ void make_http_request(Client* new_client){
   }
   strcat(buffer,new_client->path);
   strcat(buffer,new_client->parameters_of_r);
-  strcat(buffer," HTTP/1.0");
-  if((nbytes = write(htons(new_client->port),buffer,size_of_buf))<0){
+  strcat(buffer," HTTP/1.0\r\n");
+  printf("%s",buffer);
+  if((nbytes = write(fd,buffer,size_of_buf)) < 0){
     perror("write");
     exit(1);
   }
-  if((nbytes=read(htons(new_client->port),buffer_to_read,sizeof(buffer_to_read)))<0){
-    perror("read");
-    exit(1);
-  };
-  buffer_to_read[nbytes-1] = '\0';
-  printf("Answer for the server is: %s",buffer_to_read);
+  // if((nbytes=read(fd,buffer_to_read,sizeof(buffer_to_read)))<0){
+  //   perror("read");
+  //   exit(1);
+  // };
+  // buffer_to_read[nbytes-1] = '\0';
+  // printf("Answer for the server is: %s",buffer_to_read);
 }

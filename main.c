@@ -1,9 +1,10 @@
 #include "Client.c"
 #include "malloc.h"
 int main(void) {
-  char* argv[8] = {"-p","5","blabl","-r","2","city=dallas","state=texas","http://www.google.com"};
+  char* argv[8] = {"-p","5","blabl","-r","2","city=dallas","state=texas","http://www.google.com:80/t/ex2"};
   Client* new_client =(Client*)malloc(sizeof(Client));
   http_parsing(8,argv,new_client);
+  // printf("\n%s\n",new_client->parameters_of_r);
   make_http_request(new_client);
   // struct hostent* hp;
   // struct sockaddr_in *new_socket =(struct sockaddr_in*)malloc(sizeof(new_socket));
