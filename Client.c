@@ -2,6 +2,7 @@
    it and make the http command.*/
 #include "string.h"
 #include "stdlib.h"
+#include <netdb.h>
 struct Client
 {
   int port;
@@ -97,7 +98,7 @@ Client* http_parsing(int length_of_argv,char *argv[]){
                 j++;
               }
               new_client->port = atoi(temp_for_port);
-              strncat(new_client->path,&argv[i][j],1);
+              strncat(new_client->path,&argv[i][j],1);/*adds the / to the path at place 0.*/
               free(temp_for_port);
             }
             else{/*adds the value of the path to the placeholder char* path*/
@@ -128,4 +129,32 @@ Client* http_parsing(int length_of_argv,char *argv[]){
     }
   }
   return new_client;
+}
+void make_http_request(Client* new_client){
+  /*makes the http request and send it to the server*/
+  struct sockaddr_in new_socket;
+  struct hostent *hp;
+  int flag_p = 0;
+  int size_of_buf = 14 + strlen(new_client->text)+strlen(new_client->path)+strlen(new_client->parameters_of_r);
+  if(new_client->text_length!= 0){
+    size_of_buf+3;
+    flag_p = 1;
+  }
+  if(new_client->parameters_of_r!=NULL)size_of_buf+2;
+  char* buffer = (char*)malloc(size_of_buf*sizeof(char));
+  hp = gethostbyname(new_client->url);
+  new_socket.sin_addr.s_addr = ((struct in_addr*)(hp->h_addr_list[0]))->s_addr;
+  new_socket.sin_family = AF_INET;
+  if(connect(htons(new_client->port),(struct sockaddr*)&new_socket,sizeof(new_socket))<0)
+    {
+      perror("connect");
+      exit(1);
+    }
+  if(flag_p ==1){
+    strcat(buffer,"POST ");
+    strcat(buffer,new_client->path);
+    strcat(buffer,new_client->parameters_of_r);
+    strcat(buffer," HTTP/1.0");
+  }
+
 }
