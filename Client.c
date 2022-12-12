@@ -2,6 +2,7 @@
    it and make the http command.*/
 #include "string.h"
 #include "stdlib.h"
+#include <stdio.h>
 #include <netdb.h>
 struct Client
 {
@@ -22,7 +23,7 @@ void client_init(Client* new_client){
   new_client->url = (char*)malloc(sizeof(char));
   new_client->text_length = 0;
 }
-Client* http_parsing(int length_of_argv,char *argv[]){
+Client* http_parsing(int length_of_argv,char *argv[],Client* new_client){
   int flag_r = 0;
   int flag_p = 0;
   int flag_in_url = 0;
@@ -30,7 +31,6 @@ Client* http_parsing(int length_of_argv,char *argv[]){
   int number_of_parameters = 0;
   int size_of_text = 0;
   int size_of_parameters = 0;
-  Client* new_client = (Client*)malloc(sizeof(Client));
   client_init(new_client);
   char *check_com = (char*)malloc(sizeof(char*));/*check for if the value inside the http:// if we arrived to the value .com*/
   for (int i = 0; i<length_of_argv; i++) {
@@ -86,6 +86,7 @@ Client* http_parsing(int length_of_argv,char *argv[]){
             if (strcmp(check_com, ".com")==0) {
               // checks if we are at the end of the url.
               flag_in_url = 0;
+              strncat(new_client->url,"\0",1);
             }
           } 
           else {
@@ -133,7 +134,10 @@ Client* http_parsing(int length_of_argv,char *argv[]){
 void make_http_request(Client* new_client){
   /*makes the http request and send it to the server*/
   struct sockaddr_in new_socket;
-  struct hostent *hp;
+  struct hostent *hp =(struct hostent*)malloc(sizeof(struct hostent));
+  int nbytes;
+  char* buffer;
+  char buffer_to_read[400];
   int flag_p = 0;
   int size_of_buf = 14 + strlen(new_client->text)+strlen(new_client->path)+strlen(new_client->parameters_of_r);
   if(new_client->text_length!= 0){
@@ -141,8 +145,9 @@ void make_http_request(Client* new_client){
     flag_p = 1;
   }
   if(new_client->parameters_of_r!=NULL)size_of_buf+2;
-  char* buffer = (char*)malloc(size_of_buf*sizeof(char));
+  buffer = (char*)malloc(size_of_buf*sizeof(char));
   hp = gethostbyname(new_client->url);
+  printf("%s",hp->h_addr_list[0]);
   new_socket.sin_addr.s_addr = ((struct in_addr*)(hp->h_addr_list[0]))->s_addr;
   new_socket.sin_family = AF_INET;
   if(connect(htons(new_client->port),(struct sockaddr*)&new_socket,sizeof(new_socket))<0)
@@ -152,9 +157,21 @@ void make_http_request(Client* new_client){
     }
   if(flag_p ==1){
     strcat(buffer,"POST ");
-    strcat(buffer,new_client->path);
-    strcat(buffer,new_client->parameters_of_r);
-    strcat(buffer," HTTP/1.0");
   }
-
+  else{
+    strcat(buffer,"GET ");
+  }
+  strcat(buffer,new_client->path);
+  strcat(buffer,new_client->parameters_of_r);
+  strcat(buffer," HTTP/1.0");
+  if((nbytes = write(htons(new_client->port),buffer,size_of_buf))<0){
+    perror("write");
+    exit(1);
+  }
+  if((nbytes=read(htons(new_client->port),buffer_to_read,sizeof(buffer_to_read)))<0){
+    perror("read");
+    exit(1);
+  };
+  buffer_to_read[nbytes-1] = '\0';
+  printf("Answer for the server is: %s",buffer_to_read);
 }
