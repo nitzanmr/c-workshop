@@ -88,7 +88,7 @@ Client* http_parsing(int length_of_argv,char *argv[]){
             }
           } 
           else {
-            if (argv[i][j] == ':'&& j>5) { // check if there is a spacific port.
+            if (argv[i][j] == ':') { // check if there is a spacific port.
               char* temp_for_port = (char*)malloc(sizeof(char));
               while(argv[i][j] != '/'&&argv[i][j]!=NULL){
                 if(argv[i][j]!=':'){
@@ -97,6 +97,7 @@ Client* http_parsing(int length_of_argv,char *argv[]){
                 j++;
               }
               new_client->port = atoi(temp_for_port);
+              strncat(new_client->path,&argv[i][j],1);
               free(temp_for_port);
             }
             else{/*adds the value of the path to the placeholder char* path*/
