@@ -27,6 +27,7 @@ Client* http_parsing(int length_of_argv,char *argv[],Client* new_client){
   int flag_r = 0;
   int flag_p = 0;
   int flag_in_url = 0;
+  int number_of_slash = 0;
   int check_next = 0;
   int number_of_parameters = 0;
   int size_of_text = 0;
@@ -73,8 +74,12 @@ Client* http_parsing(int length_of_argv,char *argv[],Client* new_client){
         flag_in_url = 1;
         for (int j = 0; argv[i][j] != NULL; j++) {
           if (flag_in_url == 1) {
+            
+            if(number_of_slash==2){
+              strncat(new_client->url, &argv[i][j],1);
+            }
+            if(argv[i][j]=='/')number_of_slash++;
             /// runs while in the url and adds to the *url and to *check_com.
-            strncat(new_client->url, &argv[i][j],1);
             if(strlen(check_com)>=4){
               /*checks if the number of values in check_com is more than 4 to delete the first one and add the new one to the end*/
               for (int k = 0; k < 4; k++)
@@ -134,7 +139,7 @@ Client* http_parsing(int length_of_argv,char *argv[],Client* new_client){
 void make_http_request(Client* new_client){
   /*makes the http request and send it to the server*/
   struct sockaddr_in new_socket;
-  struct hostent *hp =(struct hostent*)malloc(sizeof(struct hostent));
+  struct hostent *hp;
   int nbytes;
   char* buffer;
   char buffer_to_read[400];
@@ -147,7 +152,6 @@ void make_http_request(Client* new_client){
   if(new_client->parameters_of_r!=NULL)size_of_buf+2;
   buffer = (char*)malloc(size_of_buf*sizeof(char));
   hp = gethostbyname(new_client->url);
-  printf("%s",hp->h_addr_list[0]);
   new_socket.sin_addr.s_addr = ((struct in_addr*)(hp->h_addr_list[0]))->s_addr;
   new_socket.sin_family = AF_INET;
   if(connect(htons(new_client->port),(struct sockaddr*)&new_socket,sizeof(new_socket))<0)
