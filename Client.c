@@ -145,6 +145,9 @@ void make_http_request(Client* new_client){
   char buffer[512];
   char buffer_to_read[512];
   int flag_p = 0;
+  int size_of_text_length = snprintf(NULL,0,"%d",new_client->text_length);
+  char* text_length = (char*)malloc(size_of_text_length);
+  sprintf(text_length,"%d",new_client->text_length);
   int size_of_buf = 14 + strlen(new_client->text)+strlen(new_client->path)+strlen(new_client->parameters_of_r);
   if(new_client->text_length!= 0){
     size_of_buf+3;
@@ -177,10 +180,9 @@ void make_http_request(Client* new_client){
   strcat(buffer,new_client->url);
   strcat(buffer,"\r\n");
   strcat(buffer,"content-length: ");
-  strcat(buffer,itoa(new_client->text_length));
-  strcat(buffer,new_client->path);
-
-
+  strcat(buffer,text_length);
+  strcat(buffer,"\r\n");
+  strcat(buffer,new_client->text);
   strcat(buffer,"\r\n\r\n");
   printf("%s",buffer);
   // if((nbytes = write(fd,buffer,size_of_buf)) < 0){
