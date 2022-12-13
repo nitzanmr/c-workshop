@@ -145,6 +145,7 @@ void make_http_request(Client* new_client){
   char buffer[512];
   char buffer_to_read[512];
   int flag_p = 0;
+  int flag_end_of_text = 0;
   int size_of_text_length = snprintf(NULL,0,"%d",new_client->text_length);
   char* text_length = (char*)malloc(size_of_text_length);
   sprintf(text_length,"%d",new_client->text_length);
@@ -174,14 +175,39 @@ void make_http_request(Client* new_client){
 
   // }
   strcat(buffer,new_client->path);
+  size_of_buf+=strlen(new_client->path);
   strcat(buffer,new_client->parameters_of_r);
+  size_of_buf+=strlen(new_client->parameters_of_r);
   strcat(buffer," HTTP/1.0\r\n");
+  size_of_buf+=strlen(" HTTP/1.0");
   strcat(buffer,"HOST: ");
+  size_of_buf+=strlen("HOST: ");
   strcat(buffer,new_client->url);
+  size_of_buf+=strlen(new_client->url);
   strcat(buffer,"\r\n");
+  size_of_buf+=strlen("\r\n");
   strcat(buffer,"content-length: ");
+  size_of_buf+=strlen("content-length: ");
   strcat(buffer,text_length);
+  size_of_buf+=strlen(text_length);
   strcat(buffer,"\r\n");
+  size_of_buf+=strlen("\r\n");    
+  while(size_of_buf+strlen(new_client->text)> 512){
+    int temp_size_buf = 0;
+
+    strncat(buffer,new_client->text,512-size_of_buf);
+    for(int i =0;i<512;i++){
+      if(new_client->text[512-size_of_buf+i]!='\0'){
+        new_client->text[i]=new_client->text[512-size_of_buf+i];
+        temp_size_buf++;
+      }
+      else {
+        write(fd,buffer,size_of_buf);
+        size_of_buf = temp_size_buf;
+        flag_end_of_text = 1;
+      }
+    }
+  }
   strcat(buffer,new_client->text);
   strcat(buffer,"\r\n\r\n");
   printf("%s",buffer);
