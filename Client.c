@@ -142,8 +142,8 @@ void make_http_request(Client* new_client){
   struct sockaddr_in new_socket;
   struct hostent *hp;
   int nbytes;
-  char* buffer;
-  char buffer_to_read[400];
+  char buffer[512];
+  char buffer_to_read[512];
   int flag_p = 0;
   int size_of_buf = 14 + strlen(new_client->text)+strlen(new_client->path)+strlen(new_client->parameters_of_r);
   if(new_client->text_length!= 0){
@@ -151,7 +151,6 @@ void make_http_request(Client* new_client){
     flag_p = 1;
   }
   if(new_client->parameters_of_r!=NULL)size_of_buf+2;
-  buffer = (char*)malloc(size_of_buf*sizeof(char));
   hp = gethostbyname(new_client->url);
   int fd = socket(PF_INET,SOCK_STREAM,0);
   new_socket.sin_addr.s_addr = ((struct in_addr*)(hp->h_addr_list[0]))->s_addr;
@@ -168,14 +167,26 @@ void make_http_request(Client* new_client){
   else{
     strcat(buffer,"GET ");
   }
+  // while(size_of_buf<512){
+
+  // }
   strcat(buffer,new_client->path);
   strcat(buffer,new_client->parameters_of_r);
   strcat(buffer," HTTP/1.0\r\n");
+  strcat(buffer,"HOST: ");
+  strcat(buffer,new_client->url);
+  strcat(buffer,"\r\n");
+  strcat(buffer,"content-length: ");
+  strcat(buffer,itoa(new_client->text_length));
+  strcat(buffer,new_client->path);
+
+
+  strcat(buffer,"\r\n\r\n");
   printf("%s",buffer);
-  if((nbytes = write(fd,buffer,size_of_buf)) < 0){
-    perror("write");
-    exit(1);
-  }
+  // if((nbytes = write(fd,buffer,size_of_buf)) < 0){
+  //   perror("write");
+  //   exit(1);
+  // }
   // if((nbytes=read(fd,buffer_to_read,sizeof(buffer_to_read)))<0){
   //   perror("read");
   //   exit(1);
