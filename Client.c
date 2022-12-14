@@ -39,7 +39,13 @@ Client* http_parsing(int length_of_argv,char *kkkk[],Client* new_client){
       size_of_text = atoi(kkkk[i]);/*checks the value of the size of the text.*/
       i++;
       if(kkkk[i]== NULL){/*check if the value of the text is not NULL*/
-        perror("argv is null");
+        char* error_messeage;
+        sprintf(error_messeage,"kkkk[%d] is NULL",i);
+        perror(error_messeage);
+        exit(1);
+      }
+      if(strlen(kkkk[i])<size_of_text){
+        perror("The size specifed after -p is greater than the size of the text given");
         exit(1);
       }
       strncat(new_client->text,kkkk[i],size_of_text);
@@ -89,11 +95,11 @@ Client* http_parsing(int length_of_argv,char *kkkk[],Client* new_client){
               }
             }
             strncat(check_com,&kkkk[i][j],1);
-            if (strcmp(check_com, ".com")==0) {
-              // checks if we are at the end of the url.
-              flag_in_url = 0;
-              strncat(new_client->url,"\0",1);
-            }
+            // if (strcmp(check_com, ".com")==0) {
+            //   // checks if we are at the end of the url.
+            //   flag_in_url = 0;
+            //   strncat(new_client->url,"\0",1);
+            // }
           } 
           else {
             if (kkkk[i][j] == ':') { // check if there is a spacific port.
@@ -135,6 +141,10 @@ Client* http_parsing(int length_of_argv,char *kkkk[],Client* new_client){
       }
     }
   }
+  if(new_client->url=="\0"||new_client->url==NULL){
+    perror("the url is NULL");
+    exit(1);
+  }
   return new_client;
 }
 void make_http_request(Client* new_client){
@@ -171,9 +181,6 @@ void make_http_request(Client* new_client){
   else{
     strcpy(buffer,"GET ");
   }
-  // while(size_of_buf<512){
-
-  // }
   strcat(buffer,new_client->path);
   size_of_buf+=strlen(new_client->path);
   strcat(buffer,new_client->parameters_of_r);
@@ -219,20 +226,24 @@ void make_http_request(Client* new_client){
     }
     else{
       strncat(buffer,new_client->text,strlen(new_client->text));
+      strcat(buffer,"\r\n\r\n");
+      printf("%s",buffer);
+      if((nbytes = write(fd,buffer,size_of_buf)) < 0){
+        perror("write");
+        exit(1);
+      }
     }    
   }
-  
   //strcat(buffer,new_client->text);
-  strcat(buffer,"\r\n\r\n");
-  printf("%s",buffer);
-  if((nbytes = write(fd,buffer,size_of_buf)) < 0){
-    perror("write");
-    exit(1);
+  printf("The answer from the server is: \n");
+  while (read(fd,buffer_to_read,sizeof(buffer_to_read))!=0)
+  {
+    printf("%s",buffer_to_read);
   }
-  if((nbytes=read(fd,buffer_to_read,sizeof(buffer_to_read)))<0){
-    perror("read");
-    exit(1);
-  };
+  
+  // if((nbytes=)<0){
+  //   perror("read");
+  //   exit(1);
+  // };
   // buffer_to_read[nbytes-1] = '\0';
-  printf("Answer for the server is: %s",buffer_to_read);
 }
