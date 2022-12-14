@@ -4,7 +4,6 @@ int main(void) {
   char* kkke[5] = ("-r","2","city=dallas","state=texas","http://www.google.com:80/t/ex2");
   Client* new_client2 = (Client*)malloc(sizeof(Client));
   Client* new_client =(Client*)malloc(sizeof(Client));
-  // http_parsing(8,argv,new_client);
   http_parsing(5,kkke,new_client2);
   // printf("\n%s\n",new_client->parameters_of_r);
   // make_http_request(new_client);
