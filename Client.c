@@ -23,7 +23,7 @@ void client_init(Client* new_client){
   new_client->url = (char*)malloc(sizeof(char));
   new_client->text_length = 0;
 }
-Client* http_parsing(int length_of_argv,char *argv[],Client* new_client){
+Client* http_parsing(int length_of_argv,char *args[],Client* new_client){
   int flag_r = 0;
   int flag_p = 0;
   int flag_in_url = 0;
@@ -36,20 +36,20 @@ Client* http_parsing(int length_of_argv,char *argv[],Client* new_client){
   char *check_com = (char*)malloc(sizeof(char*));/*check for if the value inside the http:// if we arrived to the value .com*/
   for (int i = 0; i<length_of_argv; i++) {
     if (flag_p == 1) {/*checks for the value of the flag of p and adds the text that comes afterwards to the */
-      size_of_text = atoi(argv[i]);/*checks the value of the size of the text.*/
+      size_of_text = atoi(args[i]);/*checks the value of the size of the text.*/
       i++;
-      if(argv[i]== NULL){/*check if the value of the text is not NULL*/
+      if(args[i]== NULL){/*check if the value of the text is not NULL*/
         perror("argv is null");
         exit(1);
       }
-      strncat(new_client->text,argv[i],size_of_text);
+      strncat(new_client->text,args[i],size_of_text);
       new_client->text_length = size_of_text;
       flag_p=0;
     }
     if (flag_r == 1) {
-      number_of_parameters = atoi(argv[i]);///enter the number of parameters into placeholder
+      number_of_parameters = atoi(args[i]);///enter the number of parameters into placeholder
       for(int k =i+1;k<=i+number_of_parameters;k++){
-        for (int j = 0; argv[k][j] != NULL; j++){
+        for (int j = 0; args[k][j] != NULL; j++){
           size_of_parameters++;
         }
       }
@@ -60,7 +60,7 @@ Client* http_parsing(int length_of_argv,char *argv[],Client* new_client){
     } 
     else if (number_of_parameters >= 1) {
       char and_char = '&';
-      strcat(new_client->parameters_of_r, argv[i]);
+      strcat(new_client->parameters_of_r, args[i]);
       number_of_parameters--;
 
       if(number_of_parameters >= 1)
@@ -71,15 +71,15 @@ Client* http_parsing(int length_of_argv,char *argv[],Client* new_client){
         number_of_parameters = -1;
     } 
     else {
-      if(strstr(argv[i],"http://")!=NULL){
+      if(strstr(args[i],"http://")!=NULL){
         flag_in_url = 1;
-        for (int j = 0; argv[i][j] != NULL; j++) {
+        for (int j = 0; args[i][j] != NULL; j++) {
           if (flag_in_url == 1) {
             
             if(number_of_slash==2){
-              strncat(new_client->url, &argv[i][j],1);
+              strncat(new_client->url, &args[i][j],1);
             }
-            if(argv[i][j]=='/')number_of_slash++;
+            if(args[i][j]=='/')number_of_slash++;
             /// runs while in the url and adds to the *url and to *check_com.
             if(strlen(check_com)>=4){
               /*checks if the number of values in check_com is more than 4 to delete the first one and add the new one to the end*/
@@ -88,7 +88,7 @@ Client* http_parsing(int length_of_argv,char *argv[],Client* new_client){
                 check_com[k] = check_com[k+1];
               }
             }
-            strncat(check_com,&argv[i][j],1);
+            strncat(check_com,&args[i][j],1);
             if (strcmp(check_com, ".com")==0) {
               // checks if we are at the end of the url.
               flag_in_url = 0;
@@ -96,20 +96,20 @@ Client* http_parsing(int length_of_argv,char *argv[],Client* new_client){
             }
           } 
           else {
-            if (argv[i][j] == ':') { // check if there is a spacific port.
+            if (args[i][j] == ':') { // check if there is a spacific port.
               char* temp_for_port = (char*)malloc(sizeof(char));
-              while(argv[i][j] != '/'&&argv[i][j]!=NULL){
-                if(argv[i][j]!=':'){
-                  strncat(temp_for_port,&argv[i][j],1);
+              while(args[i][j] != '/'&&args[i][j]!=NULL){
+                if(args[i][j]!=':'){
+                  strncat(temp_for_port,&args[i][j],1);
                 }
                 j++;
               }
               new_client->port = atoi(temp_for_port);
-              strncat(new_client->path,&argv[i][j],1);/*adds the / to the path at place 0.*/
+              strncat(new_client->path,&args[i][j],1);/*adds the / to the path at place 0.*/
               free(temp_for_port);
             }
             else{/*adds the value of the path to the placeholder char* path*/
-              strncat(new_client->path,&argv[i][j],1);
+              strncat(new_client->path,&args[i][j],1);
             }
           }
         }
@@ -119,14 +119,14 @@ Client* http_parsing(int length_of_argv,char *argv[],Client* new_client){
         }
       }
       else{
-        for (int j = 0; j <= strlen(argv[i]); j++) {
-          if (argv[i][j] == '-') {
+        for (int j = 0; j <= strlen(args[i]); j++) {
+          if (args[i][j] == '-') {
             check_next = 1;
           } else if (check_next == 1) {
-            if (argv[i][j] == 'r' && number_of_parameters != -1) {
+            if (args[i][j] == 'r' && number_of_parameters != -1) {
               flag_r = 1;
             } 
-            else if (argv[i][j] == 'p') {
+            else if (args[i][j] == 'p') {
               flag_p = 1;
             }
             check_next = 0;
@@ -191,24 +191,30 @@ void make_http_request(Client* new_client){
   strcat(buffer,text_length);
   size_of_buf+=strlen(text_length);
   strcat(buffer,"\r\n");
-  size_of_buf+=strlen("\r\n");    
-  while(size_of_buf+strlen(new_client->text)> 512){
-    int temp_size_buf = 0;
+  size_of_buf+=strlen("\r\n");
+  if(size_of_buf+strlen(new_client->text)> 508){
+    while(size_of_buf+strlen(new_client->text)> 508){
+        int temp_size_buf = 0;
 
-    strncat(buffer,new_client->text,512-size_of_buf);
-    for(int i =0;i<512;i++){
-      if(new_client->text[512-size_of_buf+i]!='\0'){
-        new_client->text[i]=new_client->text[512-size_of_buf+i];
-        temp_size_buf++;
+        strncat(buffer,new_client->text,512-size_of_buf);
+        for(int i =0;i<strlen(new_client->text);i++){
+          if(new_client->text[i]!='\0'){
+            new_client->text[i]=new_client->text[512-size_of_buf+i];
+            temp_size_buf++;
+          }
+          else {
+            strcat(buffer,"\r\n\r\n");
+            write(fd,buffer,size_of_buf);
+            size_of_buf = temp_size_buf;
+            flag_end_of_text = 1;
+          }
+        }
       }
-      else {
-        write(fd,buffer,size_of_buf);
-        size_of_buf = temp_size_buf;
-        flag_end_of_text = 1;
-      }
-    }
   }
-  strcat(buffer,new_client->text);
+  else{
+    strncat(buffer,new_client->text,strlen(new_client->text));
+  }    
+  //strcat(buffer,new_client->text);
   strcat(buffer,"\r\n\r\n");
   printf("%s",buffer);
   // if((nbytes = write(fd,buffer,size_of_buf)) < 0){
