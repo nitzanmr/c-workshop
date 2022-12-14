@@ -166,10 +166,10 @@ void make_http_request(Client* new_client){
       exit(1);
     }
   if(flag_p ==1){
-    strcat(buffer,"POST ");
+    strcpy(buffer,"POST ");
   }
   else{
-    strcat(buffer,"GET ");
+    strcpy(buffer,"GET ");
   }
   // while(size_of_buf<512){
 
@@ -186,34 +186,40 @@ void make_http_request(Client* new_client){
   size_of_buf+=strlen(new_client->url);
   strcat(buffer,"\r\n");
   size_of_buf+=strlen("\r\n");
-  strcat(buffer,"content-length: ");
-  size_of_buf+=strlen("content-length: ");
-  strcat(buffer,text_length);
-  size_of_buf+=strlen(text_length);
-  strcat(buffer,"\r\n");
-  size_of_buf+=strlen("\r\n");
-  if(size_of_buf+strlen(new_client->text)> 508){
-    while(size_of_buf+strlen(new_client->text)> 508){
-        int temp_size_buf = 0;
+  if(strlen(new_client->text)!=0){
+    strcat(buffer,"content-length: ");
+    size_of_buf+=strlen("content-length: ");
+    strcat(buffer,text_length);
+  }
+  
+  if(new_client->text!=NULL){
+    size_of_buf+=strlen(text_length);
+    strcat(buffer,"\r\n");
+    size_of_buf+=strlen("\r\n");
+    if(size_of_buf+strlen(new_client->text)> 508){
+      while(size_of_buf+strlen(new_client->text)> 508){
+          int temp_size_buf = 0;
 
-        strncat(buffer,new_client->text,512-size_of_buf);
-        for(int i =0;i<strlen(new_client->text);i++){
-          if(new_client->text[i]!='\0'){
-            new_client->text[i]=new_client->text[512-size_of_buf+i];
-            temp_size_buf++;
-          }
-          else {
-            strcat(buffer,"\r\n\r\n");
-            write(fd,buffer,size_of_buf);
-            size_of_buf = temp_size_buf;
-            flag_end_of_text = 1;
+          strncat(buffer,new_client->text,512-size_of_buf);
+          for(int i =0;i<strlen(new_client->text);i++){
+            if(new_client->text[i]!='\0'){
+              new_client->text[i]=new_client->text[512-size_of_buf+i];
+              temp_size_buf++;
+            }
+            else {
+              strcat(buffer,"\r\n\r\n");
+              write(fd,buffer,size_of_buf);
+              size_of_buf = temp_size_buf;
+              flag_end_of_text = 1;
+            }
           }
         }
-      }
+    }
+    else{
+      strncat(buffer,new_client->text,strlen(new_client->text));
+    }    
   }
-  else{
-    strncat(buffer,new_client->text,strlen(new_client->text));
-  }    
+  
   //strcat(buffer,new_client->text);
   strcat(buffer,"\r\n\r\n");
   printf("%s",buffer);

@@ -1,9 +1,9 @@
 #include "Client.c"
 #include "malloc.h"
 int main(void) {
-  char* kkke[5] = ("-r","2","city=dallas","state=texas","http://www.google.com:80/t/ex2");
+  char* argv[5] = {"-r","2","city=dallas","state=texas","http://www.google.com:80/t/ex2"};
   Client* client22 = (Client*)malloc(sizeof(Client));
-  http_parsing(5,kkke,client22);
+  http_parsing(5,argv,client22);
   // printf("\n%s\n",new_client->parameters_of_r);
   // make_http_request(new_client);
   make_http_request(client22);
