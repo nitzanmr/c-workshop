@@ -71,15 +71,15 @@ Client* http_parsing(int length_of_argv,char *kkkk[],Client* new_client){
         number_of_parameters = -1;
     } 
     else {
-      if(strstr(kkkk[i],"http://")!=NULL){
+      if((strstr(kkkk[i],"http://")!= NULL)){
         flag_in_url = 1;
         for (int j = 0; kkkk[i][j] != NULL; j++) {
           if (flag_in_url == 1) {
-            
-            if(number_of_slash==2){
-              strncat(new_client->url, &kkkk[i][j],1);
+            if(kkkk[i][j]=='/'||kkkk[i][j]==':')number_of_slash++;
+            if(number_of_slash==3){
+              if(kkkk[i][j]!='/')
+                strncat(new_client->url, &kkkk[i][j],1);
             }
-            if(kkkk[i][j]=='/')number_of_slash++;
             /// runs while in the url and adds to the *url and to *check_com.
             if(strlen(check_com)>=4){
               /*checks if the number of values in check_com is more than 4 to delete the first one and add the new one to the end*/
