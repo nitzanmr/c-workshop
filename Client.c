@@ -184,20 +184,22 @@ void make_http_request(Client* new_client){
   size_of_buf+=strlen("HOST: ");
   strcat(buffer,new_client->url);
   size_of_buf+=strlen(new_client->url);
-  strcat(buffer,"\r\n");
-  size_of_buf+=strlen("\r\n");
-  if(strlen(new_client->text)!=0){
+  if(strlen(new_client->text)!=0){/*enter the content length option to the buf.*/
+    strcat(buffer,"\r\n");
+    size_of_buf+=strlen("\r\n");
     strcat(buffer,"content-length: ");
     size_of_buf+=strlen("content-length: ");
     strcat(buffer,text_length);
   }
   
-  if(new_client->text!=NULL){
+  if(new_client->text!=NULL){/*checks if the value of the text is null and adss it to buff*/
     size_of_buf+=strlen(text_length);
     strcat(buffer,"\r\n");
     size_of_buf+=strlen("\r\n");
     if(size_of_buf+strlen(new_client->text)> 508){
       while(size_of_buf+strlen(new_client->text)> 508){
+        /*loop to check if the size of the buffer until here and the text size is bigger than 
+        the size of the buffer and if it is sends it in packets of 512 bits */
           int temp_size_buf = 0;
 
           strncat(buffer,new_client->text,512-size_of_buf);
@@ -223,14 +225,14 @@ void make_http_request(Client* new_client){
   //strcat(buffer,new_client->text);
   strcat(buffer,"\r\n\r\n");
   printf("%s",buffer);
-  // if((nbytes = write(fd,buffer,size_of_buf)) < 0){
-  //   perror("write");
-  //   exit(1);
-  // }
-  // if((nbytes=read(fd,buffer_to_read,sizeof(buffer_to_read)))<0){
-  //   perror("read");
-  //   exit(1);
-  // };
+  if((nbytes = write(fd,buffer,size_of_buf)) < 0){
+    perror("write");
+    exit(1);
+  }
+  if((nbytes=read(fd,buffer_to_read,sizeof(buffer_to_read)))<0){
+    perror("read");
+    exit(1);
+  };
   // buffer_to_read[nbytes-1] = '\0';
-  // printf("Answer for the server is: %s",buffer_to_read);
+  printf("Answer for the server is: %s",buffer_to_read);
 }
