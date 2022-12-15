@@ -221,12 +221,16 @@ void make_http_request(Client* new_client){
             }
             else {
               write(fd,buffer,size_of_buf);
+              printf("sent to the server: %s\n\n",buffer);
               if(text_length_integer<508){
                 strcpy(buffer,new_client->text);
                 strcat(buffer,"\r\n\r\n");
-                write(fd,new_client->text,text_length_integer+4);
+                write(fd,buffer,text_length_integer+4);
+                printf("sent to the server: %s\n\n",buffer);
+
                 size_of_buf =0;
                 text_length_integer=0;
+                break;
               }
               else{
                 memset(buffer, 0, sizeof buffer);
