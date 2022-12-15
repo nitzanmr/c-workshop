@@ -19,7 +19,7 @@ void client_init(Client* new_client){
   new_client->path = (char*)malloc(sizeof(char));
   new_client->path[0] = '\0';
   new_client->port = 80;
-  new_client->text = (char*)malloc(sizeof(char));
+  new_client->text;
   new_client->url = (char*)malloc(sizeof(char));
   new_client->text_length = 0;
 }
@@ -48,6 +48,7 @@ Client* http_parsing(int length_of_argv,char *kkkk[],Client* new_client){
         perror("The size specifed after -p is greater than the size of the text given");
         exit(1);
       }
+      new_client->text = (char*)malloc(size_of_text);
       strncat(new_client->text,kkkk[i],size_of_text);
       new_client->text_length = size_of_text;
       flag_p=0;
@@ -156,8 +157,9 @@ void make_http_request(Client* new_client){
   char buffer_to_read[512];
   int flag_p = 0;
   int flag_end_of_text = 0;
+  int text_length_integer = new_client->text_length;
   int size_of_text_length = snprintf(NULL,0,"%d",new_client->text_length);
-  char* text_length = (char*)malloc(size_of_text_length);
+  char* text_length[size_of_text_length+1];
   sprintf(text_length,"%d",new_client->text_length);
   int size_of_buf = 14 + strlen(new_client->text)+strlen(new_client->path)+strlen(new_client->parameters_of_r);
   if(new_client->text_length!= 0){
@@ -186,7 +188,7 @@ void make_http_request(Client* new_client){
   strcat(buffer,new_client->parameters_of_r);
   size_of_buf+=strlen(new_client->parameters_of_r);
   strcat(buffer," HTTP/1.0\r\n");
-  size_of_buf+=strlen(" HTTP/1.0");
+  size_of_buf+=strlen(" HTTP/1.0\r\n");
   strcat(buffer,"HOST: ");
   size_of_buf+=strlen("HOST: ");
   strcat(buffer,new_client->url);
@@ -203,23 +205,35 @@ void make_http_request(Client* new_client){
     size_of_buf+=strlen(text_length);
     strcat(buffer,"\r\n");
     size_of_buf+=strlen("\r\n");
-    if(size_of_buf+strlen(new_client->text)> 508){
-      while(size_of_buf+strlen(new_client->text)> 508){
+    if(size_of_buf+text_length_integer> 508){
+      strncat(buffer,new_client->text,508-size_of_buf);
+
+      while(size_of_buf+text_length_integer> 508){
         /*loop to check if the size of the buffer until here and the text size is bigger than 
         the size of the buffer and if it is sends it in packets of 512 bits */
           int temp_size_buf = 0;
 
-          strncat(buffer,new_client->text,512-size_of_buf);
-          for(int i =0;i<strlen(new_client->text);i++){
+          for(int i =0;i<strlen(new_client->text) - 508+size_of_buf;i++){
             if(new_client->text[i]!='\0'){
-              new_client->text[i]=new_client->text[512-size_of_buf+i];
+              new_client->text[i]=new_client->text[508-size_of_buf+i];
               temp_size_buf++;
+              text_length_integer--;
             }
             else {
-              strcat(buffer,"\r\n\r\n");
               write(fd,buffer,size_of_buf);
-              size_of_buf = temp_size_buf;
-              flag_end_of_text = 1;
+              if(text_length_integer<508){
+                strcpy(buffer,new_client->text);
+                strcat(buffer,"\r\n\r\n");
+                write(fd,new_client->text,text_length_integer+4);
+                size_of_buf =0;
+                text_length_integer=0;
+              }
+              else{
+                memset(buffer, 0, sizeof buffer);
+                strncat(buffer,new_client->text,508);
+                text_length_integer-=508;
+                size_of_buf = 508;
+              }
             }
           }
         }
