@@ -156,16 +156,8 @@ void make_http_request(Client* new_client){
   char buffer[512];
   char buffer_to_read[512];
   int flag_p = 0;
-  int flag_end_of_text = 0;
-  int text_length_integer = new_client->text_length;
-  int size_of_text_length = snprintf(NULL,0,"%d",new_client->text_length);
-  char* text_length[size_of_text_length+1];
-  sprintf(text_length,"%d",new_client->text_length);
-  int size_of_buf = 14 + strlen(new_client->text)+strlen(new_client->path)+strlen(new_client->parameters_of_r);
-  if(new_client->text_length!= 0){
-    size_of_buf+3;
-    flag_p = 1;
-  }
+  int size_of_buf = 0;
+  
   if(new_client->parameters_of_r!=NULL)size_of_buf+2;
   hp = gethostbyname(new_client->url);
   int fd = socket(PF_INET,SOCK_STREAM,0);
@@ -179,9 +171,11 @@ void make_http_request(Client* new_client){
     }
   if(flag_p ==1){
     strcpy(buffer,"POST ");
+    size_of_buf+=5;
   }
   else{
     strcpy(buffer,"GET ");
+    size_of_buf+=4;
   }
   strcat(buffer,new_client->path);
   size_of_buf+=strlen(new_client->path);
@@ -193,65 +187,74 @@ void make_http_request(Client* new_client){
   size_of_buf+=strlen("HOST: ");
   strcat(buffer,new_client->url);
   size_of_buf+=strlen(new_client->url);
-  if(strlen(new_client->text)!=0){/*enter the content length option to the buf.*/
-    strcat(buffer,"\r\n");
-    size_of_buf+=strlen("\r\n");
-    strcat(buffer,"content-length: ");
-    size_of_buf+=strlen("content-length: ");
-    strcat(buffer,text_length);
-  }
-  
-  if(new_client->text!=NULL){/*checks if the value of the text is null and adss it to buff*/
-    size_of_buf+=strlen(text_length);
-    strcat(buffer,"\r\n");
-    size_of_buf+=strlen("\r\n");
-    if(size_of_buf+text_length_integer> 508){
-      strncat(buffer,new_client->text,508-size_of_buf);
-
-      while(size_of_buf+text_length_integer> 508){
-        /*loop to check if the size of the buffer until here and the text size is bigger than 
-        the size of the buffer and if it is sends it in packets of 512 bits */
-          int temp_size_buf = 0;
-
-          for(int i =0;i<strlen(new_client->text) - 508+size_of_buf;i++){
-            if(new_client->text[i]!='\0'){
-              new_client->text[i]=new_client->text[508-size_of_buf+i];
-              temp_size_buf++;
-              text_length_integer--;
-            }
-            else {
-              write(fd,buffer,size_of_buf);
-              printf("sent to the server: %s\n\n",buffer);
-              if(text_length_integer<508){
-                strcpy(buffer,new_client->text);
-                strcat(buffer,"\r\n\r\n");
-                write(fd,buffer,text_length_integer+4);
-                printf("sent to the server: %s\n\n",buffer);
-
-                size_of_buf =0;
-                text_length_integer=0;
-                break;
-              }
-              else{
-                memset(buffer, 0, sizeof buffer);
-                strncat(buffer,new_client->text,508);
-                text_length_integer-=508;
-                size_of_buf = 508;
-              }
-            }
-          }
-        }
-    }
-    else{
-      strncat(buffer,new_client->text,strlen(new_client->text));
-      strcat(buffer,"\r\n\r\n");
+  if(new_client->text_length!=0&&new_client->text!=NULL){/*enter the content length option to the buf.*/
+    /*checks if the value of the text is null and adss it to buff*/
+      int text_length_integer = new_client->text_length;
+      int size_of_text_length = snprintf(NULL,0,"%d",new_client->text_length);
+      char* text_length[size_of_text_length+1];
+      sprintf(text_length,"%d",new_client->text_length);
+      strcat(buffer,"\r\n");
+      size_of_buf+=strlen("\r\n");
+      strcat(buffer,"content-length: ");
+      size_of_buf+=strlen("content-length: ");
+      strcat(buffer,text_length);
+      size_of_buf+=strlen(text_length);
+      strcat(buffer,"\r\n");
+      size_of_buf+=strlen("\r\n");
+      write(fd,buffer,size_of_buf);
+      write(fd,new_client->text,size_of_text_length);
+      write(fd,"\r\n\r\n",sizeof("\r\n\r\n"));
       printf("%s",buffer);
-      if((nbytes = write(fd,buffer,size_of_buf)) < 0){
-        perror("write");
-        exit(1);
-      }
-    }    
+      printf("%s\n",new_client->text);
   }
+  else{
+    strcat(buffer,"\r\n\r\n");
+    write(fd,buffer,strlen(buffer));
+    printf("%s",buffer);
+  } 
+   
+  
+  // if(size_of_buf+text_length_integer> 508){
+    //   // strncat(buffer,new_client->text,508-size_of_buf)
+      
+    // }
+    //   while(size_of_buf+text_length_integer > 508){
+    //     /*loop to check if the size of the buffer until here and the text size is bigger than 
+    //     the size of the buffer and if it is sends it in packets of 512 bits */
+    //       int temp_size_buf = 0;
+
+    //       for(int i =0;i<strlen(new_client->text) - 508+size_of_buf;i++){
+    //         if(new_client->text[i]!='\0'){
+    //           new_client->text[i]=new_client->text[508-size_of_buf+i];
+    //           temp_size_buf++;
+    //           text_length_integer--;
+    //         }
+    //         else {
+    //           write(fd,buffer,size_of_buf);
+
+    //           printf("sent to the server: %s\n\n",buffer);
+    //           if(text_length_integer<508){
+    //             memset(buffer, '\0', sizeof buffer);
+    //             strncat(buffer,new_client->text,text_length_integer);
+    //             strcat(buffer,"\r\n\r\n");
+    //             write(fd,buffer,text_length_integer+4);
+    //             printf("sent to the server: %s\n\n",buffer);
+
+    //             size_of_buf =0;
+    //             text_length_integer=0;
+    //             break;
+    //           }
+    //           else{
+    //             memset(buffer, 0, sizeof buffer);
+    //             strncat(buffer,new_client->text,508);
+    //             text_length_integer-=508;
+    //             size_of_buf = 508;
+    //           }
+    //         }
+    //       }
+    //     }
+    // }   
+  
   //strcat(buffer,new_client->text);
   printf("The answer from the server is: \n");
   while (read(fd,buffer_to_read,sizeof(buffer_to_read))!=0)
