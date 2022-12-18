@@ -1,8 +1,8 @@
-#include "Client.c"
+#include "client.c"
 #include "malloc.h"
 int main(void) {
   char* argv[5] = {"http://www.google.com:80/","-r","2","city=dallas","state=texas"};
-  http_request_maker(argv,5);
+  http_request_maker(5,argv);
   // Client* client22 = (Client*)malloc(sizeof(Client));
   // http_parsing(5,argv,client22);
   // printf("\n%s\n",new_client->parameters_of_r);

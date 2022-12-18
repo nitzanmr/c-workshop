@@ -274,10 +274,10 @@ void free_client(Client* client_to_free){
   free(client_to_free);
  }
 }
-void http_request_maker(char* args[],int argc){
+void client(int argc,char* argv[]){
   /*a function to unite the other functions together and then free the malloced data.*/
     Client* client22 = (Client*)malloc(sizeof(Client));
-    http_parsing(argc,args,client22);
+    http_parsing(argc,argv,client22);
     make_http_request(client22);
     free_client(client22);
 }
