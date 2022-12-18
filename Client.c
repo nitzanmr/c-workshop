@@ -256,6 +256,7 @@ void make_http_request(Client* new_client){
 }
 void free_client(Client* client_to_free){
   /*
+  frees the folowing malloced inside client:
   text
   url
   path
@@ -274,6 +275,7 @@ void free_client(Client* client_to_free){
  }
 }
 void http_request_maker(char* args[],int argc){
+  /*a function to unite the other functions together and then free the malloced data.*/
     Client* client22 = (Client*)malloc(sizeof(Client));
     http_parsing(argc,args,client22);
     make_http_request(client22);
