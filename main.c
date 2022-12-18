@@ -2,11 +2,12 @@
 #include "malloc.h"
 int main(void) {
   char* argv[5] = {"http://www.google.com:80/","-r","2","city=dallas","state=texas"};
-  Client* client22 = (Client*)malloc(sizeof(Client));
-  http_parsing(5,argv,client22);
+  http_request_maker(argv,5);
+  // Client* client22 = (Client*)malloc(sizeof(Client));
+  // http_parsing(5,argv,client22);
   // printf("\n%s\n",new_client->parameters_of_r);
   // make_http_request(new_client);
-  make_http_request(client22);
+  // make_http_request(client22);
   // struct hostent* hp;
   // struct sockaddr_in *new_socket =(struct sockaddr_in*)malloc(sizeof(new_socket));
 

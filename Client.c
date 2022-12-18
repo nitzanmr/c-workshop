@@ -15,7 +15,7 @@ struct Client
 }typedef Client;
 
 void client_init(Client* new_client){
-  new_client->parameters_of_r =(char*)malloc(sizeof(char));
+  new_client->parameters_of_r;
   new_client->path = (char*)malloc(sizeof(char));
   new_client->path[0] = '\0';
   new_client->port = 80;
@@ -33,7 +33,6 @@ Client* http_parsing(int length_of_argv,char *kkkk[],Client* new_client){
   int size_of_text = 0;
   int size_of_parameters = 1;
   client_init(new_client);
-  char *check_com = (char*)malloc(sizeof(char*));/*check for if the value inside the http:// if we arrived to the value .com*/
   for (int i = 0; i<length_of_argv; i++) {
     if (flag_p == 1) {/*checks for the value of the flag of p and adds the text that comes afterwards to the */
       size_of_text = atoi(kkkk[i]);/*checks the value of the size of the text.*/
@@ -87,20 +86,6 @@ Client* http_parsing(int length_of_argv,char *kkkk[],Client* new_client){
               if(kkkk[i][j]!='/')
                 strncat(new_client->url, &kkkk[i][j],1);
             }
-            /// runs while in the url and adds to the *url and to *check_com.
-            if(strlen(check_com)>=4){
-              /*checks if the number of values in check_com is more than 4 to delete the first one and add the new one to the end*/
-              for (int k = 0; k < 4; k++)
-              {
-                check_com[k] = check_com[k+1];
-              }
-            }
-            strncat(check_com,&kkkk[i][j],1);
-            // if (strcmp(check_com, ".com")==0) {
-            //   // checks if we are at the end of the url.
-            //   flag_in_url = 0;
-            //   strncat(new_client->url,"\0",1);
-            // }
           } 
           else {
             if (kkkk[i][j] == ':') { // check if there is a spacific port.
@@ -187,25 +172,26 @@ void make_http_request(Client* new_client){
   size_of_buf+=strlen("HOST: ");
   strcat(buffer,new_client->url);
   size_of_buf+=strlen(new_client->url);
-  if(new_client->text_length!=0&&new_client->text!=NULL){/*enter the content length option to the buf.*/
+  if(new_client->text_length!=0&&new_client->text!=NULL){
+    /*enter the content length option to the buf.*/
     /*checks if the value of the text is null and adss it to buff*/
-      int text_length_integer = new_client->text_length;
-      int size_of_text_length = snprintf(NULL,0,"%d",new_client->text_length);
-      char* text_length[size_of_text_length+1];
-      sprintf(text_length,"%d",new_client->text_length);
-      strcat(buffer,"\r\n");
-      size_of_buf+=strlen("\r\n");
-      strcat(buffer,"content-length: ");
-      size_of_buf+=strlen("content-length: ");
-      strcat(buffer,text_length);
-      size_of_buf+=strlen(text_length);
-      strcat(buffer,"\r\n");
-      size_of_buf+=strlen("\r\n");
-      write(fd,buffer,size_of_buf);
-      write(fd,new_client->text,size_of_text_length);
-      write(fd,"\r\n\r\n",sizeof("\r\n\r\n"));
-      printf("%s",buffer);
-      printf("%s\n",new_client->text);
+    int text_length_integer = new_client->text_length;
+    int size_of_text_length = snprintf(NULL,0,"%d",new_client->text_length);
+    char* text_length[size_of_text_length+1];
+    sprintf(text_length,"%d",new_client->text_length);
+    strcat(buffer,"\r\n");
+    size_of_buf+=strlen("\r\n");
+    strcat(buffer,"content-length: ");
+    size_of_buf+=strlen("content-length: ");
+    strcat(buffer,text_length);
+    size_of_buf+=strlen(text_length);
+    strcat(buffer,"\r\n");
+    size_of_buf+=strlen("\r\n");
+    write(fd,buffer,size_of_buf);
+    write(fd,new_client->text,size_of_text_length);
+    write(fd,"\r\n\r\n",sizeof("\r\n\r\n"));
+    printf("%s",buffer);
+    printf("%s\n",new_client->text);
   }
   else{
     strcat(buffer,"\r\n\r\n");
@@ -267,4 +253,29 @@ void make_http_request(Client* new_client){
   //   exit(1);
   // };
   // buffer_to_read[nbytes-1] = '\0';
+}
+void free_client(Client* client_to_free){
+  /*
+  text
+  url
+  path
+  parameters if not null
+  client 
+  */
+ if(client_to_free!= NULL){
+  if(client_to_free->text_length > 0){
+    free(client_to_free->text);
+  }
+  if(client_to_free->parameters_of_r!= NULL){
+    free(client_to_free->parameters_of_r);
+  }
+  free(client_to_free->url);
+  free(client_to_free);
+ }
+}
+void http_request_maker(char* args[],int argc){
+    Client* client22 = (Client*)malloc(sizeof(Client));
+    http_parsing(argc,args,client22);
+    make_http_request(client22);
+    free_client(client22);
 }
