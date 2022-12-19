@@ -200,9 +200,9 @@ void make_http_request(Client* new_client){
     write(fd,buffer,size_of_buf);
     write(fd,new_client->text,size_of_text_length);
     write(fd,"\r\n\r\n",sizeof("\r\n\r\n"));
-    printf("HTTP request =\n%s\nLEN = %d\n",buffer, strlen(buffer));
-    printf("%s",buffer);
-    printf("%s\n",new_client->text);
+    printf("HTTP request =\n%s",buffer, strlen(buffer));
+    printf(" %s",new_client->text);
+    printf("\nLEN = %d\n",strlen(buffer)+strlen(new_client->text));
   }
   else{
     strcat(buffer,"\r\n\r\n");
