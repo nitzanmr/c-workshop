@@ -140,15 +140,25 @@ void make_http_request(Client* new_client){
   int nbytes;
   char buffer[512];
   char buffer_to_read[512];
+  int chars_read = 0;
   int flag_p = 0;
   int size_of_buf = 0;
-  
+  int fd;
   if(new_client->parameters_of_r!=NULL)size_of_buf+2;
-  hp = gethostbyname(new_client->url);
-  int fd = socket(PF_INET,SOCK_STREAM,0);
+  if((hp = gethostbyname(new_client->url))==NULL){
+    herror("gethostbyname");
+    exit(1);
+  };
+  if((fd = socket(PF_INET,SOCK_STREAM,0)) < 0){
+    perror("socket");
+    exit(1);
+  };
   new_socket.sin_addr.s_addr = ((struct in_addr*)(hp->h_addr_list[0]))->s_addr;
   new_socket.sin_family = PF_INET;
-  new_socket.sin_port = htons(new_client->port);
+  if((new_socket.sin_port = htons(new_client->port))==0){
+    perror("htons");
+    exit(1);
+  };
   if(connect(fd,(struct sockaddr*)&new_socket,sizeof(new_socket))<0)
     {
       perror("connect");
@@ -190,25 +200,23 @@ void make_http_request(Client* new_client){
     write(fd,buffer,size_of_buf);
     write(fd,new_client->text,size_of_text_length);
     write(fd,"\r\n\r\n",sizeof("\r\n\r\n"));
+    printf("HTTP request =\n%s\nLEN = %d\n",buffer, strlen(buffer));
     printf("%s",buffer);
     printf("%s\n",new_client->text);
   }
   else{
     strcat(buffer,"\r\n\r\n");
     write(fd,buffer,strlen(buffer));
-    printf("%s",buffer);
+    printf("HTTP request =\n%s\nLEN = %d\n",buffer, strlen(buffer));
   } 
-  printf("The answer from the server is: \n");
-  while (read(fd,buffer_to_read,sizeof(buffer_to_read))!=0)
+  printf("response: \n");
+  int read_byts;
+  while ((read_byts = read(fd,buffer_to_read,sizeof(buffer_to_read)))!=0)
   {
+    chars_read+=read_byts;
     printf("%s",buffer_to_read);
   }
-  
-  // if((nbytes=)<0){
-  //   perror("read");
-  //   exit(1);
-  // };
-  // buffer_to_read[nbytes-1] = '\0';
+  printf("\n Total received response bytes: %d\n",chars_read);
 }
 void free_client(Client* client_to_free){
   /*
