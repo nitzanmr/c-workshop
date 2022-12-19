@@ -198,50 +198,6 @@ void make_http_request(Client* new_client){
     write(fd,buffer,strlen(buffer));
     printf("%s",buffer);
   } 
-   
-  
-  // if(size_of_buf+text_length_integer> 508){
-    //   // strncat(buffer,new_client->text,508-size_of_buf)
-      
-    // }
-    //   while(size_of_buf+text_length_integer > 508){
-    //     /*loop to check if the size of the buffer until here and the text size is bigger than 
-    //     the size of the buffer and if it is sends it in packets of 512 bits */
-    //       int temp_size_buf = 0;
-
-    //       for(int i =0;i<strlen(new_client->text) - 508+size_of_buf;i++){
-    //         if(new_client->text[i]!='\0'){
-    //           new_client->text[i]=new_client->text[508-size_of_buf+i];
-    //           temp_size_buf++;
-    //           text_length_integer--;
-    //         }
-    //         else {
-    //           write(fd,buffer,size_of_buf);
-
-    //           printf("sent to the server: %s\n\n",buffer);
-    //           if(text_length_integer<508){
-    //             memset(buffer, '\0', sizeof buffer);
-    //             strncat(buffer,new_client->text,text_length_integer);
-    //             strcat(buffer,"\r\n\r\n");
-    //             write(fd,buffer,text_length_integer+4);
-    //             printf("sent to the server: %s\n\n",buffer);
-
-    //             size_of_buf =0;
-    //             text_length_integer=0;
-    //             break;
-    //           }
-    //           else{
-    //             memset(buffer, 0, sizeof buffer);
-    //             strncat(buffer,new_client->text,508);
-    //             text_length_integer-=508;
-    //             size_of_buf = 508;
-    //           }
-    //         }
-    //       }
-    //     }
-    // }   
-  
-  //strcat(buffer,new_client->text);
   printf("The answer from the server is: \n");
   while (read(fd,buffer_to_read,sizeof(buffer_to_read))!=0)
   {
@@ -274,10 +230,11 @@ void free_client(Client* client_to_free){
   free(client_to_free);
  }
 }
-void client(int argc,char* argv[]){
+int main(int argc,char* argv[]){
   /*a function to unite the other functions together and then free the malloced data.*/
     Client* client22 = (Client*)malloc(sizeof(Client));
     http_parsing(argc,argv,client22);
     make_http_request(client22);
     free_client(client22);
+    return 0;
 }
