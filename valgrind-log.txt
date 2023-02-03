@@ -1,0 +1,885 @@
+==28364== Memcheck, a memory error detector
+==28364== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==28364== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==28364== Command: ./ex2 -p 24 full8functionality8check -r 1 MyParameter=ParameterWithLongName http://localhost:5000/life_cycle
+==28364== Parent PID: 28363
+==28364== 
+--28364-- 
+--28364-- Valgrind options:
+--28364--    --leak-check=full
+--28364--    --tool=memcheck
+--28364--    --show-leak-kinds=all
+--28364--    --track-origins=yes
+--28364--    --verbose
+--28364--    --error-exitcode=1
+--28364--    -v
+--28364--    --log-file=valgrind-log.txt
+--28364-- Contents of /proc/version:
+--28364--   Linux version 5.4.0-1100-azure (buildd@lcy02-amd64-046) (gcc version 7.5.0 (Ubuntu 7.5.0-3ubuntu1~18.04)) #106~18.04.1-Ubuntu SMP Mon Dec 12 21:49:35 UTC 2022
+--28364-- 
+--28364-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-ssse3-avx-avx2-bmi-f16c-rdrand
+--28364-- Page sizes: currently 4096, max supported 4096
+--28364-- Valgrind library directory: /usr/lib/x86_64-linux-gnu/valgrind
+--28364-- TT/TC: VG_(init_tt_tc) (startup of code management)
+--28364-- TT/TC: cache: ignoring --avg-transtab-entry-size=0, using tool provided default 640
+--28364-- TT/TC: cache: 32 sectors of 27,597,024 bytes each = 883,104,768 total TC
+--28364-- TT/TC: table: 32 tables[42588] of C 4,769,856 + H 1,362,816 bytes each = 196,245,504 total TT
+--28364-- TT/TC: table: 42588 tt entries each = 1,362,816 total tt entries
+--28364-- TT/TC: table: 32 htt[65521] of 131,042 bytes each = 4,193,344 total HTT (htt[65521] 65% max occup)
+==28364== Adding active redirection:
+--28364--     new: 0xffffffffff600000 (???                 ) R-> (0000.0) 0x580c9cc4 ???
+==28364== Adding active redirection:
+--28364--     new: 0xffffffffff600400 (???                 ) R-> (0000.0) 0x580c9cce ???
+==28364== Adding active redirection:
+--28364--     new: 0xffffffffff600800 (???                 ) R-> (0000.0) 0x580c9cd8 ???
+--28364-- Reading syms from /workspaces/c-workshop/ex2
+--28364--    svma 0x00000012e0, avma 0x00001092e0
+--28364-- Reading syms from /usr/lib/x86_64-linux-gnu/ld-2.31.so
+--28364--    svma 0x0000001100, avma 0x0004001100
+--28364--   Considering /usr/lib/debug/.build-id/45/87364908de169dec62ffa538170118c1c3a078.debug ..
+--28364--   .. build-id is valid
+--28364-- summarise_context(loc_start = 0x14): cannot summarise(why=1):   
+0x35f: [0]={ 56(r3) { u  u  u  c-56 u  u  u  u  u  u  u  u  u  u  u  u  c-8 u  u  u  }
+--28364-- summarise_context(loc_start = 0x367): cannot summarise(why=1):   
+0x471: [0]={ 56(r3) { u  u  u  c-56 u  u  u  u  u  u  u  u  u  u  u  u  c-8 u  u  u  }
+--28364-- summarise_context(loc_start = 0x14): cannot summarise(why=1):   
+0x36f: [0]={ 56(r3) { u  u  u  c-56 u  u  u  u  u  u  u  u  u  u  u  u  c-8 u  u  u  }
+--28364-- summarise_context(loc_start = 0x377): cannot summarise(why=1):   
+0x473: [0]={ 56(r3) { u  u  u  c-56 u  u  u  u  u  u  u  u  u  u  u  u  c-8 u  u  u  }
+--28364-- summarise_context(loc_start = 0x14): cannot summarise(why=1):   
+0x14b: [0]={ 56(r3) { u  u  u  c-56 u  u  u  u  u  u  u  u  u  u  u  u  c-8 u  u  u  }
+--28364-- summarise_context(loc_start = 0x153): cannot summarise(why=1):   
+0x1f7: [0]={ 56(r3) { u  u  u  c-56 u  u  u  u  u  u  u  u  u  u  u  u  c-8 u  u  u  }
+--28364-- summarise_context(loc_start = 0x8): cannot summarise(why=1):   
+0x74: [0]={ 32(r3) { u  u  u  c-32 u  u  u  u  u  u  u  u  u  u  u  u  c-8 u  u  u  }
+--28364-- summarise_context(loc_start = 0x8): cannot summarise(why=1):   
+0xc2: [0]={ 32(r3) { u  u  u  c-32 u  u  u  u  u  u  u  u  u  u  u  u  c-8 u  u  u  }
+--28364-- summarise_context(loc_start = 0x8): cannot summarise(why=1):   
+0xb2: [0]={ 32(r3) { u  u  u  c-32 u  u  u  u  u  u  u  u  u  u  u  u  c-8 u  u  u  }
+--28364-- summarise_context(loc_start = 0x60): cannot summarise(why=1):   
+0x7e: [0]={ 0(r5) { u  u  u  c0 u  u  dwReg9 dwReg8 u  u  u  u  c16 c24 c32 c40 dwReg1 u  u  u  }
+==28364== Adding active redirection:
+--28364--     new: 0x04022bf0 (index               ) R-> (0000.0) 0x580c9cfc ???
+==28364== Adding active redirection:
+--28364--     new: 0x04022e20 (strlen              ) R-> (0000.0) 0x580c9ce2 ???
+--28364-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/memcheck-amd64-linux
+--28364--    svma 0x0058001000, avma 0x0058001000
+--28364--    object doesn't have a symbol table
+--28364--    object doesn't have a dynamic symbol table
+--28364-- Scheduler: using generic scheduler lock implementation.
+--28364-- Reading suppressions file: /usr/lib/x86_64-linux-gnu/valgrind/default.supp
+==28364== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-28364-by-codespace-on-codespaces-94a9e0
+==28364== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-28364-by-codespace-on-codespaces-94a9e0
+==28364== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-28364-by-codespace-on-codespaces-94a9e0
+==28364== 
+==28364== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==28364== don't want to do, unless you know exactly what you're doing,
+==28364== or are doing some strange experiment):
+==28364==   /usr/lib/x86_64-linux-gnu/valgrind/../../bin/vgdb --pid=28364 ...command...
+==28364== 
+==28364== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==28364==   /path/to/gdb ./ex2
+==28364== and then give GDB the following command
+==28364==   target remote | /usr/lib/x86_64-linux-gnu/valgrind/../../bin/vgdb --pid=28364
+==28364== --pid is optional if only one valgrind process is running
+==28364== 
+--28364-- TT/TC: initialise sector 0
+--28364-- REDIR: 0x4022e20 (ld-linux-x86-64.so.2:strlen) redirected to 0x580c9ce2 (???)
+--28364-- REDIR: 0x4022bf0 (ld-linux-x86-64.so.2:index) redirected to 0x580c9cfc (???)
+--28364-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_core-amd64-linux.so
+--28364--    svma 0x0000001070, avma 0x0004831070
+--28364--    object doesn't have a symbol table
+--28364-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so
+--28364--    svma 0x00000040c0, avma 0x000483b0c0
+--28364--    object doesn't have a symbol table
+==28364== Adding active redirection:
+--28364--     new: 0x0401f600 (strcmp              ) R-> (2016.0) 0x0483ffd0 strcmp
+==28364== WARNING: new redirection conflicts with existing -- ignoring it
+--28364--     old: 0x04022e20 (strlen              ) R-> (0000.0) 0x580c9ce2 ???
+--28364--     new: 0x04022e20 (strlen              ) R-> (2007.0) 0x0483f060 strlen
+==28364== Adding active redirection:
+--28364--     new: 0x040231e0 (stpcpy              ) R-> (2020.0) 0x04842710 stpcpy
+==28364== Adding active redirection:
+--28364--     new: 0x04023380 (mempcpy             ) R-> (2029.0) 0x04843a20 mempcpy
+--28364-- REDIR: 0x401f600 (ld-linux-x86-64.so.2:strcmp) redirected to 0x483ffd0 (strcmp)
+--28364-- REDIR: 0x4023380 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4843a20 (mempcpy)
+--28364-- Reading syms from /usr/lib/x86_64-linux-gnu/libc-2.31.so
+--28364--    svma 0x0000022630, avma 0x0004876630
+--28364--   Considering /usr/lib/debug/.build-id/18/78e6b475720c7c51969e69ab2d276fae6d1dee.debug ..
+--28364--   .. build-id is valid
+--28364-- summarise_context(loc_start = 0x72): cannot summarise(why=1):   
+0x90: [0]={ 0(r5) { u  u  u  c0 u  u  dwReg9 dwReg8 u  u  u  u  c16 c24 c32 c40 dwReg1 u  u  u  }
+--28364-- summarise_context(loc_start = 0x38): cannot summarise(why=1):   
+0x56: [0]={ 0(r5) { u  u  u  c0 u  u  dwReg9 dwReg8 u  u  u  u  c16 c24 c32 c40 dwReg1 u  u  u  }
+--28364-- summarise_context(loc_start = 0x3d): cannot summarise(why=1):   
+0x14c: [0]={ 0(r1) { u  u  u  c128 u  u  c120 c160 u  u  u  u  c72 c80 c88 c96 c168 u  u  u  }
+--28364-- summarise_context(loc_start = 0x10): cannot summarise(why=1):   
+0x21: [0]={ 32816(r11) { u  u  u  c-48 u  u  c-40 u  u  u  u  u  c-32 c-24 c-16 u  c-8 u  u  u  }
+--28364-- summarise_context(loc_start = 0x5): cannot summarise(why=2):   
+0x2c: [0]={ 0(r7) { u  u  u  u  u  u  u  u  u  u  u  u  u  u  u  u  dwReg5 u  u  u  }
+--28364-- summarise_context(loc_start = 0x2c): cannot summarise(why=2):   
+0x3f: [0]={ 8(r7) { u  u  u  u  u  u  u  u  u  u  u  u  u  u  u  u  dwReg5 u  u  u  }
+--28364-- summarise_context(loc_start = 0xc2): cannot summarise(why=1):   
+0xe0: [0]={ 0(r5) { u  u  u  c0 u  u  dwReg9 dwReg8 u  u  u  u  c16 c24 c32 c40 dwReg1 u  u  u  }
+==28364== Adding active redirection:
+--28364--     new: 0x04899f90 (putenv              ) W-> (0000.0) 0x04844320 putenv
+==28364== Adding active redirection:
+--28364--     new: 0x0489a4f0 (setenv              ) W-> (0000.0) 0x04844480 setenv
+==28364== Adding active redirection:
+--28364--     new: 0x0489a550 (unsetenv            ) W-> (0000.0) 0x048443d0 unsetenv
+==28364== Adding active redirection:
+--28364--     new: 0x048ee0e0 (malloc              ) R-> (1001.0) 0x0483b780 malloc
+==28364== Ignoring duplicate redirection:
+--28364--     old: 0x048ee0e0 (malloc              ) R-> (1001.0) 0x0483b780 malloc
+--28364--     new: 0x048ee0e0 (malloc              ) R-> (1001.0) 0x0483b6b0 malloc
+==28364== Ignoring duplicate redirection:
+--28364--     old: 0x048ee0e0 (malloc              ) R-> (1001.0) 0x0483b780 malloc
+--28364--     new: 0x048ee0e0 (malloc              ) R-> (1001.0) 0x0483b6b0 malloc
+==28364== Adding active redirection:
+--28364--     new: 0x048ee6d0 (free                ) R-> (1005.0) 0x0483c9d0 free
+==28364== Ignoring duplicate redirection:
+--28364--     old: 0x048ee6d0 (free                ) R-> (1005.0) 0x0483c9d0 free
+--28364--     new: 0x048ee6d0 (free                ) R-> (1005.0) 0x0483c920 free
+==28364== Ignoring duplicate redirection:
+--28364--     old: 0x048ee6d0 (free                ) R-> (1005.0) 0x0483c9d0 free
+--28364--     new: 0x048ee6d0 (free                ) R-> (1005.0) 0x0483cbe0 cfree
+==28364== Ignoring duplicate redirection:
+--28364--     old: 0x048ee6d0 (free                ) R-> (1005.0) 0x0483c9d0 free
+--28364--     new: 0x048ee6d0 (free                ) R-> (1005.0) 0x0483cb30 cfree
+==28364== Adding active redirection:
+--28364--     new: 0x048eee80 (realloc             ) R-> (1009.0) 0x0483df30 realloc
+==28364== Ignoring duplicate redirection:
+--28364--     old: 0x048eee80 (realloc             ) R-> (1009.0) 0x0483df30 realloc
+--28364--     new: 0x048eee80 (realloc             ) R-> (1009.0) 0x0483de10 realloc
+==28364== Ignoring duplicate redirection:
+--28364--     old: 0x048eee80 (realloc             ) R-> (1009.0) 0x0483df30 realloc
+--28364--     new: 0x048eee80 (realloc             ) R-> (1009.0) 0x0483de10 realloc
+==28364== Adding active redirection:
+--28364--     new: 0x048ef250 (memalign            ) R-> (1011.0) 0x0483e2a0 memalign
+==28364== Ignoring duplicate redirection:
+--28364--     old: 0x048ef250 (memalign            ) R-> (1011.0) 0x0483e2a0 memalign
+--28364--     new: 0x048ef250 (memalign            ) R-> (1011.0) 0x0483e050 memalign
+==28364== Ignoring duplicate redirection:
+--28364--     old: 0x048ef250 (memalign            ) R-> (1011.0) 0x0483e2a0 memalign
+--28364--     new: 0x048ef250 (memalign            ) R-> (1011.0) 0x0483e050 memalign
+==28364== Adding active redirection:
+--28364--     new: 0x048ef510 (valloc              ) R-> (1012.0) 0x0483e1a0 valloc
+==28364== Ignoring duplicate redirection:
+--28364--     old: 0x048ef510 (valloc              ) R-> (1012.0) 0x0483e1a0 valloc
+--28364--     new: 0x048ef510 (valloc              ) R-> (1012.0) 0x0483e160 valloc
+==28364== Adding active redirection:
+--28364--     new: 0x048ef7f0 (pvalloc             ) R-> (1018.0) 0x0483b560 pvalloc
+==28364== Adding active redirection:
+--28364--     new: 0x048efb10 (calloc              ) R-> (1007.0) 0x0483dce0 calloc
+==28364== Ignoring duplicate redirection:
+--28364--     old: 0x048efb10 (calloc              ) R-> (1007.0) 0x0483dce0 calloc
+--28364--     new: 0x048efb10 (calloc              ) R-> (1007.0) 0x0483dbb0 calloc
+==28364== Ignoring duplicate redirection:
+--28364--     old: 0x048efb10 (calloc              ) R-> (1007.0) 0x0483dce0 calloc
+--28364--     new: 0x048efb10 (calloc              ) R-> (1007.0) 0x0483dbb0 calloc
+==28364== Adding active redirection:
+--28364--     new: 0x048efeb0 (malloc_trim         ) R-> (1015.0) 0x0483b540 malloc_trim
+==28364== Adding active redirection:
+--28364--     new: 0x048f01b0 (malloc_usable_size  ) R-> (1017.0) 0x0483e3b0 malloc_usable_size
+==28364== Adding active redirection:
+--28364--     new: 0x048f0290 (mallinfo            ) R-> (1020.0) 0x0483e810 mallinfo
+==28364== Ignoring duplicate redirection:
+--28364--     old: 0x048f0290 (mallinfo            ) R-> (1020.0) 0x0483e810 mallinfo
+--28364--     new: 0x048f0290 (mallinfo            ) R-> (1020.0) 0x0483e730 mallinfo
+==28364== Ignoring duplicate redirection:
+--28364--     old: 0x048f0290 (mallinfo            ) R-> (1020.0) 0x0483e810 mallinfo
+--28364--     new: 0x048f0290 (mallinfo            ) R-> (1020.0) 0x0483e730 mallinfo
+==28364== Adding active redirection:
+--28364--     new: 0x048f03d0 (malloc_stats        ) R-> (1019.0) 0x0483b5c0 malloc_stats
+==28364== Adding active redirection:
+--28364--     new: 0x048f0610 (mallopt             ) R-> (1014.0) 0x0483b520 mallopt
+==28364== Ignoring duplicate redirection:
+--28364--     old: 0x048f0610 (mallopt             ) R-> (1014.0) 0x0483b520 mallopt
+--28364--     new: 0x048f0610 (mallopt             ) R-> (1014.0) 0x0483b500 mallopt
+==28364== Adding active redirection:
+--28364--     new: 0x048f0830 (posix_memalign      ) R-> (1016.0) 0x0483e1e0 posix_memalign
+==28364== Adding active redirection:
+--28364--     new: 0x048f30a0 (strcat              ) R-> (2003.0) 0x0483ec20 strcat
+==28364== Ignoring duplicate redirection:
+--28364--     old: 0x048f30a0 (strcat              ) R-> (2003.0) 0x0483ec20 strcat
+--28364--     new: 0x048f30a0 (strcat              ) R-> (2003.0) 0x0483ed00 __GI_strcat
+==28364== Adding active redirection:
+--28364--     new: 0x048f3100 (index               ) R-> (2002.0) 0x0483ebf0 index
+==28364== Ignoring duplicate redirection:
+--28364--     old: 0x048f3100 (index               ) R-> (2002.0) 0x0483ebf0 index
+--28364--     new: 0x048f3100 (index               ) R-> (2002.0) 0x0483eb30 strchr
+==28364== Ignoring duplicate redirection:
+--28364--     old: 0x048f3100 (index               ) R-> (2002.0) 0x0483ebf0 index
+--28364--     new: 0x048f3100 (index               ) R-> (2002.0) 0x0483eb60 __GI_strchr
+==28364== Adding active redirection:
+--28364--     new: 0x048f3150 (strcmp              ) R-> (2016.0) 0x0483fed0 strcmp
+==28364== Ignoring duplicate redirection:
+--28364--     old: 0x048f3150 (strcmp              ) R-> (2016.0) 0x0483fed0 strcmp
+--28364--     new: 0x048f3150 (strcmp              ) R-> (2016.0) 0x0483ff10 __GI_strcmp
+==28364== Adding active redirection:
+--28364--     new: 0x048f31d0 (strcpy              ) R-> (2008.0) 0x0483f090 strcpy
+==28364== Ignoring duplicate redirection:
+--28364--     old: 0x048f31d0 (strcpy              ) R-> (2008.0) 0x0483f090 strcpy
+--28364--     new: 0x048f31d0 (strcpy              ) R-> (2008.0) 0x0483f160 __GI_strcpy
+==28364== Adding active redirection:
+--28364--     new: 0x048f3230 (strcspn             ) R-> (2033.0) 0x04843e10 strcspn
+==28364== Ignoring duplicate redirection:
+--28364--     old: 0x048f3230 (strcspn             ) R-> (2033.0) 0x04843e10 strcspn
+--28364--     new: 0x048f3230 (strcspn             ) R-> (2033.0) 0x04843e80 __GI_strcspn
+==28364== Adding active redirection:
+--28364--     new: 0x048f3630 (strlen              ) R-> (2007.0) 0x0483ef40 strlen
+==28364== Ignoring duplicate redirection:
+--28364--     old: 0x048f3630 (strlen              ) R-> (2007.0) 0x0483ef40 strlen
+--28364--     new: 0x048f3630 (strlen              ) R-> (2007.0) 0x0483ef70 __GI_strlen
+==28364== Adding active redirection:
+--28364--     new: 0x048f3670 (strnlen             ) R-> (2006.0) 0x0483eee0 strnlen
+==28364== Ignoring duplicate redirection:
+--28364--     old: 0x048f3670 (strnlen             ) R-> (2006.0) 0x0483eee0 strnlen
+--28364--     new: 0x048f3670 (strnlen             ) R-> (2006.0) 0x0483ef10 __GI_strnlen
+==28364== Adding active redirection:
+--28364--     new: 0x048f36b0 (strncat             ) R-> (2004.0) 0x0483ede0 strncat
+==28364== Adding active redirection:
+--28364--     new: 0x048f3710 (strncmp             ) R-> (2011.0) 0x0483f670 strncmp
+==28364== Ignoring duplicate redirection:
+--28364--     old: 0x048f3710 (strncmp             ) R-> (2011.0) 0x0483f670 strncmp
+--28364--     new: 0x048f3710 (strncmp             ) R-> (2011.0) 0x0483f6e0 __GI_strncmp
+==28364== Adding active redirection:
+--28364--     new: 0x048f3780 (strncpy             ) R-> (2009.0) 0x0483f230 strncpy
+==28364== Ignoring duplicate redirection:
+--28364--     old: 0x048f3780 (strncpy             ) R-> (2009.0) 0x0483f230 strncpy
+--28364--     new: 0x048f3780 (strncpy             ) R-> (2009.0) 0x0483f340 __GI_strncpy
+==28364== Adding active redirection:
+--28364--     new: 0x048f37e0 (rindex              ) R-> (2001.0) 0x0483ea10 rindex
+==28364== Ignoring duplicate redirection:
+--28364--     old: 0x048f37e0 (rindex              ) R-> (2001.0) 0x0483ea10 rindex
+--28364--     new: 0x048f37e0 (rindex              ) R-> (2001.0) 0x0483e9e0 strrchr
+==28364== Ignoring duplicate redirection:
+--28364--     old: 0x048f37e0 (rindex              ) R-> (2001.0) 0x0483ea10 rindex
+--28364--     new: 0x048f37e0 (rindex              ) R-> (2001.0) 0x0483ea40 __GI_strrchr
+==28364== Adding active redirection:
+--28364--     new: 0x048f3820 (strpbrk             ) R-> (2032.0) 0x04843da0 strpbrk
+==28364== Adding active redirection:
+--28364--     new: 0x048f3ae0 (strspn              ) R-> (2034.0) 0x04843ef0 strspn
+==28364== Adding active redirection:
+--28364--     new: 0x048f3fa0 (__GI_strstr         ) R-> (2031.0) 0x04843ca0 __strstr_sse2
+==28364== Adding active redirection:
+--28364--     new: 0x048f42f0 (strstr              ) R-> (2031.0) 0x04843c20 strstr
+==28364== Adding active redirection:
+--28364--     new: 0x048f43d0 (memchr              ) R-> (2017.0) 0x04840050 memchr
+==28364== Ignoring duplicate redirection:
+--28364--     old: 0x048f43d0 (memchr              ) R-> (2017.0) 0x04840050 memchr
+--28364--     new: 0x048f43d0 (memchr              ) R-> (2017.0) 0x04840090 __GI_memchr
+==28364== Adding active redirection:
+--28364--     new: 0x048f4410 (bcmp                ) R-> (2019.0) 0x048421e0 bcmp
+==28364== Ignoring duplicate redirection:
+--28364--     old: 0x048f4410 (bcmp                ) R-> (2019.0) 0x048421e0 bcmp
+--28364--     new: 0x048f4410 (bcmp                ) R-> (2019.0) 0x04841fa0 memcmp
+==28364== Ignoring duplicate redirection:
+--28364--     old: 0x048f4410 (bcmp                ) R-> (2019.0) 0x048421e0 bcmp
+--28364--     new: 0x048f4410 (bcmp                ) R-> (2019.0) 0x04841fa0 memcmp
+==28364== Ignoring duplicate redirection:
+--28364--     old: 0x048f4410 (bcmp                ) R-> (2019.0) 0x048421e0 bcmp
+--28364--     new: 0x048f4410 (bcmp                ) R-> (2019.0) 0x04842030 __GI_memcmp
+==28364== Adding active redirection:
+--28364--     new: 0x048f4480 (memmove             ) R-> (2018.1) 0x048429f0 memmove
+==28364== Ignoring duplicate redirection:
+--28364--     old: 0x048f4480 (memmove             ) R-> (2018.1) 0x048429f0 memmove
+--28364--     new: 0x048f4480 (memmove             ) R-> (2018.1) 0x04842d70 __GI_memmove
+==28364== Adding active redirection:
+--28364--     new: 0x048f4540 (memset              ) R-> (2021.0) 0x048428e0 memset
+==28364== Adding active redirection:
+--28364--     new: 0x048f45e0 (mempcpy             ) R-> (2029.0) 0x04843660 mempcpy
+==28364== Ignoring duplicate redirection:
+--28364--     old: 0x048f45e0 (mempcpy             ) R-> (2029.0) 0x04843660 mempcpy
+--28364--     new: 0x048f45e0 (mempcpy             ) R-> (2029.0) 0x04843750 __GI_mempcpy
+==28364== Adding active redirection:
+--28364--     new: 0x048f46a0 (bcopy               ) R-> (2023.0) 0x04843470 bcopy
+==28364== Adding active redirection:
+--28364--     new: 0x048f46f0 (stpcpy              ) R-> (2020.0) 0x04842300 stpcpy
+==28364== Ignoring duplicate redirection:
+--28364--     old: 0x048f46f0 (stpcpy              ) R-> (2020.0) 0x04842300 stpcpy
+--28364--     new: 0x048f46f0 (stpcpy              ) R-> (2020.0) 0x048423d0 __GI_stpcpy
+==28364== Adding active redirection:
+--28364--     new: 0x048f4750 (stpncpy             ) R-> (2042.0) 0x048427e0 stpncpy
+==28364== Adding active redirection:
+--28364--     new: 0x048f47b0 (strcasecmp          ) R-> (2012.0) 0x0483f830 strcasecmp
+==28364== Adding active redirection:
+--28364--     new: 0x048f4800 (strncasecmp         ) R-> (2013.0) 0x0483f910 strncasecmp
+==28364== Adding active redirection:
+--28364--     new: 0x048f4850 (strcasecmp_l        ) R-> (2014.0) 0x0483fab0 strcasecmp_l
+==28364== Ignoring duplicate redirection:
+--28364--     old: 0x048f4850 (strcasecmp_l        ) R-> (2014.0) 0x0483fab0 strcasecmp_l
+--28364--     new: 0x048f4850 (strcasecmp_l        ) R-> (2014.0) 0x0483fb90 __GI___strcasecmp_l
+==28364== Adding active redirection:
+--28364--     new: 0x048f48a0 (strncasecmp_l       ) R-> (2015.0) 0x0483fc00 strncasecmp_l
+==28364== Ignoring duplicate redirection:
+--28364--     old: 0x048f48a0 (strncasecmp_l       ) R-> (2015.0) 0x0483fc00 strncasecmp_l
+--28364--     new: 0x048f48a0 (strncasecmp_l       ) R-> (2015.0) 0x0483fde0 __GI___strncasecmp_l
+==28364== Adding active redirection:
+--28364--     new: 0x048f4950 (memcpy@@GLIBC_2.14  ) R-> (2018.0) 0x04840480 memcpy@@GLIBC_2.14
+==28364== Ignoring duplicate redirection:
+--28364--     old: 0x048f4950 (memcpy@@GLIBC_2.14  ) R-> (2018.0) 0x04840480 memcpy@@GLIBC_2.14
+--28364--     new: 0x048f4950 (memcpy@@GLIBC_2.14  ) R-> (2018.0) 0x04840860 memcpy
+==28364== Ignoring duplicate redirection:
+--28364--     old: 0x048f4950 (memcpy@@GLIBC_2.14  ) R-> (2018.0) 0x04840480 memcpy@@GLIBC_2.14
+--28364--     new: 0x048f4950 (memcpy@@GLIBC_2.14  ) R-> (2018.0) 0x04840c40 __GI_memcpy
+==28364== Ignoring duplicate redirection:
+--28364--     old: 0x048f4950 (memcpy@@GLIBC_2.14  ) R-> (2018.0) 0x04840480 memcpy@@GLIBC_2.14
+--28364--     new: 0x048f4950 (memcpy@@GLIBC_2.14  ) R-> (2018.0) 0x04840860 memcpy
+==28364== Adding active redirection:
+--28364--     new: 0x048f4fc0 (strcasestr          ) R-> (2035.0) 0x04843f80 strcasestr
+==28364== Adding active redirection:
+--28364--     new: 0x048f5c50 (rawmemchr           ) R-> (2026.0) 0x04843580 rawmemchr
+==28364== Ignoring duplicate redirection:
+--28364--     old: 0x048f5c50 (rawmemchr           ) R-> (2026.0) 0x04843580 rawmemchr
+--28364--     new: 0x048f5c50 (rawmemchr           ) R-> (2026.0) 0x048435a0 __GI___rawmemchr
+==28364== Adding active redirection:
+--28364--     new: 0x048f5c90 (strchrnul           ) R-> (2025.0) 0x04843540 strchrnul
+==28364== Adding active redirection:
+--28364--     new: 0x048fcbb0 (memrchr             ) R-> (2036.0) 0x048400d0 memrchr
+==28364== Adding active redirection:
+--28364--     new: 0x048fcf00 (__strncpy_sse2      ) R-> (2009.0) 0x0483f450 __strncpy_sse2
+==28364== Adding active redirection:
+--28364--     new: 0x048fcf60 (__strcmp_sse2       ) R-> (2016.0) 0x0483ff50 __strcmp_sse2
+==28364== Adding active redirection:
+--28364--     new: 0x048fe660 (__strncmp_sse2      ) R-> (2011.0) 0x0483f750 __strncmp_sse2
+==28364== Adding active redirection:
+--28364--     new: 0x049007d0 (__memcmp_sse2       ) R-> (2019.0) 0x048420c0 __memcmp_sse2
+==28364== Adding active redirection:
+--28364--     new: 0x04905480 (__strchr_sse2       ) R-> (2002.0) 0x0483eb90 __strchr_sse2
+==28364== Adding active redirection:
+--28364--     new: 0x049058c0 (__strrchr_sse2      ) R-> (2001.0) 0x0483ea70 __strrchr_sse2
+==28364== Adding active redirection:
+--28364--     new: 0x04905bc0 (__strlen_sse2       ) R-> (2007.0) 0x0483efa0 __strlen_sse2
+==28364== Adding active redirection:
+--28364--     new: 0x0490aa10 (__stpcpy_sse2       ) R-> (2020.0) 0x048424a0 __stpcpy_sse2
+==28364== Adding active redirection:
+--28364--     new: 0x0490b130 (__strncpy_sse2_unali) R-> (2009.0) 0x0483f560 __strncpy_sse2_unaligned
+==28364== Adding active redirection:
+--28364--     new: 0x0490c140 (__stpcpy_sse2_unalig) R-> (2020.0) 0x04842570 __stpcpy_sse2_unaligned
+==28364== Adding active redirection:
+--28364--     new: 0x0490fad0 (memcpy@GLIBC_2.2.5  ) R-> (2018.1) 0x04840100 memcpy@GLIBC_2.2.5
+==28364== Ignoring lower priority redirection:
+--28364--     old: 0x0490fad0 (memcpy@GLIBC_2.2.5  ) R-> (2018.1) 0x04840100 memcpy@GLIBC_2.2.5
+--28364--     new: 0x0490fad0 (memcpy@GLIBC_2.2.5  ) R-> (2018.0) 0x04840860 memcpy
+==28364== Adding active redirection:
+--28364--     new: 0x049107e0 (wcschr              ) R-> (2040.0) 0x04844260 wcschr
+==28364== Adding active redirection:
+--28364--     new: 0x04910820 (wcscmp              ) R-> (2038.0) 0x048440e0 wcscmp
+==28364== Adding active redirection:
+--28364--     new: 0x04910860 (wcscpy              ) R-> (2039.0) 0x04844190 wcscpy
+==28364== Adding active redirection:
+--28364--     new: 0x04910930 (wcslen              ) R-> (2037.0) 0x04844050 wcslen
+==28364== Adding active redirection:
+--28364--     new: 0x049109d0 (wcsncmp             ) R-> (2045.0) 0x04844120 wcsncmp
+==28364== Adding active redirection:
+--28364--     new: 0x04910ac0 (wcsrchr             ) R-> (2041.0) 0x04844290 wcsrchr
+==28364== Adding active redirection:
+--28364--     new: 0x04910ce0 (wmemchr             ) R-> (2043.0) 0x048442c0 wmemchr
+==28364== Ignoring duplicate redirection:
+--28364--     old: 0x04910ce0 (wmemchr             ) R-> (2043.0) 0x048442c0 wmemchr
+--28364--     new: 0x04910ce0 (wmemchr             ) R-> (2043.0) 0x048442f0 __GI_wmemchr
+==28364== Adding active redirection:
+--28364--     new: 0x04911f50 (wcsnlen             ) R-> (2044.0) 0x04844080 wcsnlen
+==28364== Adding active redirection:
+--28364--     new: 0x04981850 (__memcpy_chk        ) R-> (2030.0) 0x04843b10 __memcpy_chk
+==28364== Adding active redirection:
+--28364--     new: 0x04981910 (__memmove_chk       ) R-> (2024.0) 0x048434d0 __memmove_chk
+==28364== Adding active redirection:
+--28364--     new: 0x04981b30 (__stpcpy_chk        ) R-> (2028.0) 0x04843610 __stpcpy_chk
+==28364== Adding active redirection:
+--28364--     new: 0x04981c00 (__strcpy_chk        ) R-> (2027.0) 0x048435c0 __strcpy_chk
+==28364== Adding active redirection:
+--28364--     new: 0x049b4cc0 (malloc_get_state@GLI) R-> (1018.0) 0x0483b580 malloc_get_state
+==28364== Adding active redirection:
+--28364--     new: 0x049b4ce0 (malloc_set_state@GLI) R-> (1018.0) 0x0483b5a0 malloc_set_state
+==28364== Adding active redirection:
+--28364--     new: 0x049d1f10 (__strcmp_sse42      ) R-> (2016.0) 0x0483ff90 __strcmp_sse42
+==28364== Adding active redirection:
+--28364--     new: 0x049d2cc0 (__strncmp_sse42     ) R-> (2011.0) 0x0483f7c0 __strncmp_sse42
+==28364== Adding active redirection:
+--28364--     new: 0x049e1550 (__memcmp_sse4_1     ) R-> (2019.0) 0x04842150 __memcmp_sse4_1
+==28364== Adding active redirection:
+--28364--     new: 0x049e4b50 (__strchr_sse2_no_bsf) R-> (2002.0) 0x0483ebc0 __strchr_sse2_no_bsf
+--28364-- REDIR: 0x48f4480 (libc.so.6:memmove) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+==28364== Adding active redirection:
+--28364--     new: 0x049df6e0 (__memcpy_avx_unalign) R-> (2018.1) 0x048429f0 memmove
+--28364-- REDIR: 0x48f3780 (libc.so.6:strncpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+==28364== Adding active redirection:
+--28364--     new: 0x049ddfa0 (__strncpy_avx2      ) R-> (2009.0) 0x0483f230 strncpy
+--28364-- REDIR: 0x48f47b0 (libc.so.6:strcasecmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+==28364== Adding active redirection:
+--28364--     new: 0x049d90a0 (__strcasecmp_avx    ) R-> (2012.0) 0x0483f830 strcasecmp
+--28364-- REDIR: 0x48f30a0 (libc.so.6:strcat) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+==28364== Adding active redirection:
+--28364--     new: 0x049dcb90 (__strcat_avx2       ) R-> (2003.0) 0x0483ec20 strcat
+--28364-- REDIR: 0x48f37e0 (libc.so.6:rindex) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+==28364== Adding active redirection:
+--28364--     new: 0x049dc500 (__strrchr_avx2      ) R-> (2001.0) 0x0483ea10 rindex
+--28364-- REDIR: 0x48f5c50 (libc.so.6:rawmemchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+==28364== Adding active redirection:
+--28364--     new: 0x049d8800 (__rawmemchr_avx2    ) R-> (2026.0) 0x04843580 rawmemchr
+--28364-- REDIR: 0x4910ce0 (libc.so.6:wmemchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+==28364== Adding active redirection:
+--28364--     new: 0x049dffe0 (__wmemchr_avx2      ) R-> (2043.0) 0x048442c0 wmemchr
+--28364-- REDIR: 0x4910820 (libc.so.6:wcscmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+==28364== Adding active redirection:
+--28364--     new: 0x049e02b0 (__wcscmp_avx2       ) R-> (2038.0) 0x048440e0 wcscmp
+--28364-- REDIR: 0x48f45e0 (libc.so.6:mempcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+==28364== Adding active redirection:
+--28364--     new: 0x049df6c0 (__mempcpy_avx_unalig) R-> (2029.0) 0x04843660 mempcpy
+--28364-- REDIR: 0x48f4410 (libc.so.6:bcmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+==28364== Adding active redirection:
+--28364--     new: 0x049d8cc0 (__memcmp_avx2_movbe ) R-> (2019.0) 0x048421e0 bcmp
+--28364-- REDIR: 0x48f3710 (libc.so.6:strncmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+==28364== Adding active redirection:
+--28364--     new: 0x049d8010 (__strncmp_avx2      ) R-> (2011.0) 0x0483f670 strncmp
+--28364-- REDIR: 0x48f3150 (libc.so.6:strcmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+==28364== Adding active redirection:
+--28364--     new: 0x049d7bd0 (__strcmp_avx2       ) R-> (2016.0) 0x0483fed0 strcmp
+--28364-- REDIR: 0x48f4540 (libc.so.6:memset) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+==28364== Adding active redirection:
+--28364--     new: 0x049dfb60 (__memset_avx2_unalig) R-> (2021.0) 0x048428e0 memset
+--28364-- REDIR: 0x49107e0 (libc.so.6:wcschr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+==28364== Adding active redirection:
+--28364--     new: 0x049e0c20 (__wcschr_avx2       ) R-> (2040.0) 0x04844260 wcschr
+--28364-- REDIR: 0x48f3670 (libc.so.6:strnlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+==28364== Adding active redirection:
+--28364--     new: 0x049dc870 (__strnlen_avx2      ) R-> (2006.0) 0x0483eee0 strnlen
+--28364-- REDIR: 0x48f3230 (libc.so.6:strcspn) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+==28364== Adding active redirection:
+--28364--     new: 0x049d7820 (__strcspn_sse42     ) R-> (2033.0) 0x04843e10 strcspn
+--28364-- REDIR: 0x48f4800 (libc.so.6:strncasecmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+==28364== Adding active redirection:
+--28364--     new: 0x049da720 (__strncasecmp_avx   ) R-> (2013.0) 0x0483f910 strncasecmp
+--28364-- REDIR: 0x48f31d0 (libc.so.6:strcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+==28364== Adding active redirection:
+--28364--     new: 0x049ddc10 (__strcpy_avx2       ) R-> (2008.0) 0x0483f090 strcpy
+--28364-- REDIR: 0x48f4950 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+==28364== Ignoring lower priority redirection:
+--28364--     old: 0x049df6e0 (__memcpy_avx_unalign) R-> (2018.1) 0x048429f0 memmove
+--28364--     new: 0x049df6e0 (__memcpy_avx_unalign) R-> (2018.0) 0x04840480 memcpy@@GLIBC_2.14
+--28364-- REDIR: 0x4911f50 (libc.so.6:wcsnlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+==28364== Adding active redirection:
+--28364--     new: 0x049e1200 (__wcsnlen_avx2      ) R-> (2044.0) 0x04844080 wcsnlen
+--28364-- REDIR: 0x4910860 (libc.so.6:wcscpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+==28364== Adding active redirection:
+--28364--     new: 0x049d1890 (__wcscpy_ssse3      ) R-> (2039.0) 0x04844190 wcscpy
+--28364-- REDIR: 0x48f3820 (libc.so.6:strpbrk) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+==28364== Adding active redirection:
+--28364--     new: 0x049d7960 (__strpbrk_sse42     ) R-> (2032.0) 0x04843da0 strpbrk
+--28364-- REDIR: 0x48f3100 (libc.so.6:index) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+==28364== Adding active redirection:
+--28364--     new: 0x049dc0e0 (__strchr_avx2       ) R-> (2002.0) 0x0483ebf0 index
+--28364-- REDIR: 0x48f3630 (libc.so.6:strlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+==28364== Adding active redirection:
+--28364--     new: 0x049dc6d0 (__strlen_avx2       ) R-> (2007.0) 0x0483ef40 strlen
+--28364-- REDIR: 0x48fcbb0 (libc.so.6:memrchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+==28364== Adding active redirection:
+--28364--     new: 0x049d8950 (__memrchr_avx2      ) R-> (2036.0) 0x048400d0 memrchr
+--28364-- REDIR: 0x48f4850 (libc.so.6:strcasecmp_l) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+==28364== Adding active redirection:
+--28364--     new: 0x049d90b4 (__strcasecmp_l_avx  ) R-> (2014.0) 0x0483fab0 strcasecmp_l
+--28364-- REDIR: 0x48f43d0 (libc.so.6:memchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+==28364== Adding active redirection:
+--28364--     new: 0x049d8530 (__memchr_avx2       ) R-> (2017.0) 0x04840050 memchr
+--28364-- REDIR: 0x4910930 (libc.so.6:wcslen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+==28364== Adding active redirection:
+--28364--     new: 0x049e1040 (__wcslen_avx2       ) R-> (2037.0) 0x04844050 wcslen
+--28364-- REDIR: 0x48f3ae0 (libc.so.6:strspn) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+==28364== Adding active redirection:
+--28364--     new: 0x049d7aa0 (__strspn_sse42      ) R-> (2034.0) 0x04843ef0 strspn
+--28364-- REDIR: 0x48f4750 (libc.so.6:stpncpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+==28364== Adding active redirection:
+--28364--     new: 0x049decb0 (__stpncpy_avx2      ) R-> (2042.0) 0x048427e0 stpncpy
+--28364-- REDIR: 0x48f46f0 (libc.so.6:stpcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+==28364== Adding active redirection:
+--28364--     new: 0x049de900 (__stpcpy_avx2       ) R-> (2020.0) 0x04842300 stpcpy
+--28364-- REDIR: 0x48f5c90 (libc.so.6:strchrnul) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+==28364== Adding active redirection:
+--28364--     new: 0x049dc310 (__strchrnul_avx2    ) R-> (2025.0) 0x04843540 strchrnul
+--28364-- REDIR: 0x48f48a0 (libc.so.6:strncasecmp_l) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+==28364== Adding active redirection:
+--28364--     new: 0x049da734 (__strncasecmp_l_avx ) R-> (2015.0) 0x0483fc00 strncasecmp_l
+--28364-- REDIR: 0x48f36b0 (libc.so.6:strncat) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+==28364== Adding active redirection:
+--28364--     new: 0x049dd200 (__strncat_avx2      ) R-> (2004.0) 0x0483ede0 strncat
+--28364-- REDIR: 0x48f42f0 (libc.so.6:strstr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+==28364== Adding active redirection:
+--28364--     new: 0x0490f3f0 (__strstr_sse2_unalig) R-> (2031.0) 0x04843c20 strstr
+--28364-- REDIR: 0x49dc500 (libc.so.6:__strrchr_avx2) redirected to 0x483ea10 (rindex)
+--28364-- REDIR: 0x48ee0e0 (libc.so.6:malloc) redirected to 0x483b780 (malloc)
+--28364-- REDIR: 0x490f3f0 (libc.so.6:__strstr_sse2_unaligned) redirected to 0x4843c20 (strstr)
+--28364-- REDIR: 0x49dc6d0 (libc.so.6:__strlen_avx2) redirected to 0x483ef40 (strlen)
+--28364-- REDIR: 0x49dd200 (libc.so.6:__strncat_avx2) redirected to 0x483ede0 (strncat)
+==28364== Conditional jump or move depends on uninitialised value(s)
+==28364==    at 0x483EDED: strncat (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==28364==    by 0x109571: http_parsing (client.c:54)
+==28364==    by 0x10A1A5: main (client.c:266)
+==28364==  Uninitialised value was created by a heap allocation
+==28364==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==28364==    by 0x109536: http_parsing (client.c:53)
+==28364==    by 0x10A1A5: main (client.c:266)
+==28364== 
+--28364-- REDIR: 0x49dcb90 (libc.so.6:__strcat_avx2) redirected to 0x483ec20 (strcat)
+==28364== Conditional jump or move depends on uninitialised value(s)
+==28364==    at 0x483EC37: strcat (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==28364==    by 0x109685: http_parsing (client.c:72)
+==28364==    by 0x10A1A5: main (client.c:266)
+==28364==  Uninitialised value was created by a heap allocation
+==28364==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==28364==    by 0x10961B: http_parsing (client.c:66)
+==28364==    by 0x10A1A5: main (client.c:266)
+==28364== 
+==28364== Invalid write of size 1
+==28364==    at 0x1097F7: http_parsing (client.c:98)
+==28364==    by 0x10A1A5: main (client.c:266)
+==28364==  Address 0x4a491cf is 1 bytes before a block of size 34 alloc'd
+==28364==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==28364==    by 0x10971B: http_parsing (client.c:84)
+==28364==    by 0x10A1A5: main (client.c:266)
+==28364== 
+--28364-- REDIR: 0x48ee6d0 (libc.so.6:free) redirected to 0x483c9d0 (free)
+--28364-- REDIR: 0x49dc310 (libc.so.6:__strchrnul_avx2) redirected to 0x4843540 (strchrnul)
+==28364== Invalid write of size 1
+==28364==    at 0x48D90FE: __vsprintf_internal (iovsprintf.c:97)
+==28364==    by 0x48B5EC7: sprintf (sprintf.c:30)
+==28364==    by 0x1099A2: http_parsing (client.c:117)
+==28364==    by 0x10A1A5: main (client.c:266)
+==28364==  Address 0x4a4924b is 0 bytes after a block of size 11 alloc'd
+==28364==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==28364==    by 0x109957: http_parsing (client.c:116)
+==28364==    by 0x10A1A5: main (client.c:266)
+==28364== 
+--28364-- REDIR: 0x48efb10 (libc.so.6:calloc) redirected to 0x483dce0 (calloc)
+--28364-- REDIR: 0x48f3fa0 (libc.so.6:__GI_strstr) redirected to 0x4843ca0 (__strstr_sse2)
+--28364-- REDIR: 0x49d8530 (libc.so.6:__memchr_avx2) redirected to 0x4840050 (memchr)
+--28364-- REDIR: 0x49df6e0 (libc.so.6:__memcpy_avx_unaligned_erms) redirected to 0x48429f0 (memmove)
+--28364-- REDIR: 0x49da720 (libc.so.6:__strncasecmp_avx) redirected to 0x483f910 (strncasecmp)
+--28364-- REDIR: 0x49d7960 (libc.so.6:__strpbrk_sse42) redirected to 0x4843da0 (strpbrk)
+--28364-- REDIR: 0x49dc0e0 (libc.so.6:__strchr_avx2) redirected to 0x483ebf0 (index)
+--28364-- REDIR: 0x49d7bd0 (libc.so.6:__strcmp_avx2) redirected to 0x483fed0 (strcmp)
+==28364== Conditional jump or move depends on uninitialised value(s)
+==28364==    at 0x483EF58: strlen (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==28364==    by 0x49AD9B8: __nscd_gethostbyname_r (nscd_gethst_r.c:43)
+==28364==    by 0x498557A: gethostbyname_r@@GLIBC_2.2.5 (getXXbyYY_r.c:255)
+==28364==    by 0x4984718: gethostbyname (getXXbyYY.c:135)
+==28364==    by 0x109B3F: make_http_request (client.c:159)
+==28364==    by 0x10A1B1: main (client.c:268)
+==28364==  Uninitialised value was created by a heap allocation
+==28364==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==28364==    by 0x10971B: http_parsing (client.c:84)
+==28364==    by 0x10A1A5: main (client.c:266)
+==28364== 
+--28364-- REDIR: 0x49df6c0 (libc.so.6:__mempcpy_avx_unaligned_erms) redirected to 0x4843660 (mempcpy)
+--28364-- REDIR: 0x49de900 (libc.so.6:__stpcpy_avx2) redirected to 0x4842300 (stpcpy)
+--28364-- Reading syms from /usr/lib/x86_64-linux-gnu/libnss_files-2.31.so
+--28364--    svma 0x00000035c0, avma 0x0004e4c5c0
+--28364--   Considering /usr/lib/debug/.build-id/45/da81f0ac3660e3c3cb947c6244151d879ed9e8.debug ..
+--28364--   .. build-id is valid
+==28364== Ignoring lower priority redirection:
+--28364--     old: 0x049df6e0 (__memcpy_avx_unalign) R-> (2018.1) 0x048429f0 memmove
+--28364--     new: 0x049df6e0 (__memcpy_avx_unalign) R-> (2018.0) 0x04840480 memcpy@@GLIBC_2.14
+--28364-- REDIR: 0x49ddc10 (libc.so.6:__strcpy_avx2) redirected to 0x483f090 (strcpy)
+--28364-- REDIR: 0x49d90a0 (libc.so.6:__strcasecmp_avx) redirected to 0x483f830 (strcasecmp)
+==28364== Conditional jump or move depends on uninitialised value(s)
+==28364==    at 0x48881E3: tolower (ctype.c:46)
+==28364==    by 0x483F864: strcasecmp (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==28364==    by 0x4E4E816: _nss_files_gethostbyname3_r (files-hosts.c:342)
+==28364==    by 0x4E4E913: _nss_files_gethostbyname_r (files-hosts.c:364)
+==28364==    by 0x498520D: gethostbyname_r@@GLIBC_2.2.5 (getXXbyYY_r.c:315)
+==28364==    by 0x4984718: gethostbyname (getXXbyYY.c:135)
+==28364==    by 0x109B3F: make_http_request (client.c:159)
+==28364==    by 0x10A1B1: main (client.c:268)
+==28364==  Uninitialised value was created by a heap allocation
+==28364==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==28364==    by 0x10971B: http_parsing (client.c:84)
+==28364==    by 0x10A1A5: main (client.c:266)
+==28364== 
+==28364== Use of uninitialised value of size 8
+==28364==    at 0x48881F7: tolower (ctype.c:46)
+==28364==    by 0x48881F7: tolower (ctype.c:44)
+==28364==    by 0x483F864: strcasecmp (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==28364==    by 0x4E4E816: _nss_files_gethostbyname3_r (files-hosts.c:342)
+==28364==    by 0x4E4E913: _nss_files_gethostbyname_r (files-hosts.c:364)
+==28364==    by 0x498520D: gethostbyname_r@@GLIBC_2.2.5 (getXXbyYY_r.c:315)
+==28364==    by 0x4984718: gethostbyname (getXXbyYY.c:135)
+==28364==    by 0x109B3F: make_http_request (client.c:159)
+==28364==    by 0x10A1B1: main (client.c:268)
+==28364==  Uninitialised value was created by a heap allocation
+==28364==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==28364==    by 0x10971B: http_parsing (client.c:84)
+==28364==    by 0x10A1A5: main (client.c:266)
+==28364== 
+--28364-- REDIR: 0x49dfb60 (libc.so.6:__memset_avx2_unaligned_erms) redirected to 0x48428e0 (memset)
+==28364== Conditional jump or move depends on uninitialised value(s)
+==28364==    at 0x48881E3: tolower (ctype.c:46)
+==28364==    by 0x483F864: strcasecmp (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==28364==    by 0x4E4DCB3: gethostbyname3_multi (files-hosts.c:180)
+==28364==    by 0x4E4E8D9: _nss_files_gethostbyname3_r (files-hosts.c:347)
+==28364==    by 0x4E4E913: _nss_files_gethostbyname_r (files-hosts.c:364)
+==28364==    by 0x498520D: gethostbyname_r@@GLIBC_2.2.5 (getXXbyYY_r.c:315)
+==28364==    by 0x4984718: gethostbyname (getXXbyYY.c:135)
+==28364==    by 0x109B3F: make_http_request (client.c:159)
+==28364==    by 0x10A1B1: main (client.c:268)
+==28364==  Uninitialised value was created by a heap allocation
+==28364==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==28364==    by 0x10971B: http_parsing (client.c:84)
+==28364==    by 0x10A1A5: main (client.c:266)
+==28364== 
+==28364== Use of uninitialised value of size 8
+==28364==    at 0x48881F7: tolower (ctype.c:46)
+==28364==    by 0x48881F7: tolower (ctype.c:44)
+==28364==    by 0x483F864: strcasecmp (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==28364==    by 0x4E4DCB3: gethostbyname3_multi (files-hosts.c:180)
+==28364==    by 0x4E4E8D9: _nss_files_gethostbyname3_r (files-hosts.c:347)
+==28364==    by 0x4E4E913: _nss_files_gethostbyname_r (files-hosts.c:364)
+==28364==    by 0x498520D: gethostbyname_r@@GLIBC_2.2.5 (getXXbyYY_r.c:315)
+==28364==    by 0x4984718: gethostbyname (getXXbyYY.c:135)
+==28364==    by 0x109B3F: make_http_request (client.c:159)
+==28364==    by 0x10A1B1: main (client.c:268)
+==28364==  Uninitialised value was created by a heap allocation
+==28364==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==28364==    by 0x10971B: http_parsing (client.c:84)
+==28364==    by 0x10A1A5: main (client.c:266)
+==28364== 
+==28364== Invalid read of size 1
+==28364==    at 0x483EC52: strcat (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==28364==    by 0x109C2E: make_http_request (client.c:178)
+==28364==    by 0x10A1B1: main (client.c:268)
+==28364==  Address 0x4a4924b is 0 bytes after a block of size 11 alloc'd
+==28364==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==28364==    by 0x109957: http_parsing (client.c:116)
+==28364==    by 0x10A1A5: main (client.c:266)
+==28364== 
+==28364== Invalid read of size 1
+==28364==    at 0x483EF54: strlen (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==28364==    by 0x109C41: make_http_request (client.c:179)
+==28364==    by 0x10A1B1: main (client.c:268)
+==28364==  Address 0x4a4924b is 0 bytes after a block of size 11 alloc'd
+==28364==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==28364==    by 0x109957: http_parsing (client.c:116)
+==28364==    by 0x10A1A5: main (client.c:266)
+==28364== 
+==28364== Conditional jump or move depends on uninitialised value(s)
+==28364==    at 0x483EC57: strcat (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==28364==    by 0x109D5E: make_http_request (client.c:189)
+==28364==    by 0x10A1B1: main (client.c:268)
+==28364==  Uninitialised value was created by a heap allocation
+==28364==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==28364==    by 0x10971B: http_parsing (client.c:84)
+==28364==    by 0x10A1A5: main (client.c:266)
+==28364== 
+==28364== Conditional jump or move depends on uninitialised value(s)
+==28364==    at 0x483EF58: strlen (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==28364==    by 0x109D71: make_http_request (client.c:190)
+==28364==    by 0x10A1B1: main (client.c:268)
+==28364==  Uninitialised value was created by a heap allocation
+==28364==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==28364==    by 0x10971B: http_parsing (client.c:84)
+==28364==    by 0x10A1A5: main (client.c:266)
+==28364== 
+--28364-- Caught __NR_exit; running __gnu_cxx::__freeres and __libc_freeres() wrapper
+--28364-- Discarding syms at 0x4e4c5c0-0x4e52a1c in /usr/lib/x86_64-linux-gnu/libnss_files-2.31.so (have_dinfo 1)
+==28364== 
+==28364== HEAP SUMMARY:
+==28364==     in use at exit: 34 bytes in 1 blocks
+==28364==   total heap usage: 61 allocs, 60 frees, 26,923 bytes allocated
+==28364== 
+==28364== Searching for pointers to 1 not-freed blocks
+--28364--   Scanning root segment: 0x10d000..0x10dfff (4096)
+--28364--   Scanning root segment: 0x402e000..0x402efff (4096)
+--28364--   Scanning root segment: 0x402f000..0x402ffff (4096)
+--28364--   Scanning root segment: 0x4030000..0x4030fff (4096)
+--28364--   Scanning root segment: 0x4834000..0x4834fff (4096)
+--28364--   Scanning root segment: 0x4835000..0x4836fff (8192)
+--28364--   Scanning root segment: 0x4849000..0x4849fff (4096)
+--28364--   Scanning root segment: 0x4a40000..0x4a41fff (8192)
+--28364--   Scanning root segment: 0x4a42000..0x4a48fff (28672)
+--28364--   Scanning root segment: 0x1ffeffd000..0x1fff000fff (16384)
+==28364== Checked 73,864 bytes
+==28364== 
+==28364== 34 bytes in 1 blocks are definitely lost in loss record 1 of 1
+==28364==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==28364==    by 0x10971B: http_parsing (client.c:84)
+==28364==    by 0x10A1A5: main (client.c:266)
+==28364== 
+==28364== LEAK SUMMARY:
+==28364==    definitely lost: 34 bytes in 1 blocks
+==28364==    indirectly lost: 0 bytes in 0 blocks
+==28364==      possibly lost: 0 bytes in 0 blocks
+==28364==    still reachable: 0 bytes in 0 blocks
+==28364==         suppressed: 0 bytes in 0 blocks
+==28364== 
+==28364== ERROR SUMMARY: 14 errors from 14 contexts (suppressed: 0 from 0)
+==28364== 
+==28364== 1 errors in context 1 of 14:
+==28364== Conditional jump or move depends on uninitialised value(s)
+==28364==    at 0x483EF58: strlen (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==28364==    by 0x109D71: make_http_request (client.c:190)
+==28364==    by 0x10A1B1: main (client.c:268)
+==28364==  Uninitialised value was created by a heap allocation
+==28364==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==28364==    by 0x10971B: http_parsing (client.c:84)
+==28364==    by 0x10A1A5: main (client.c:266)
+==28364== 
+==28364== 
+==28364== 1 errors in context 2 of 14:
+==28364== Conditional jump or move depends on uninitialised value(s)
+==28364==    at 0x483EC57: strcat (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==28364==    by 0x109D5E: make_http_request (client.c:189)
+==28364==    by 0x10A1B1: main (client.c:268)
+==28364==  Uninitialised value was created by a heap allocation
+==28364==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==28364==    by 0x10971B: http_parsing (client.c:84)
+==28364==    by 0x10A1A5: main (client.c:266)
+==28364== 
+==28364== 
+==28364== 1 errors in context 3 of 14:
+==28364== Invalid read of size 1
+==28364==    at 0x483EF54: strlen (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==28364==    by 0x109C41: make_http_request (client.c:179)
+==28364==    by 0x10A1B1: main (client.c:268)
+==28364==  Address 0x4a4924b is 0 bytes after a block of size 11 alloc'd
+==28364==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==28364==    by 0x109957: http_parsing (client.c:116)
+==28364==    by 0x10A1A5: main (client.c:266)
+==28364== 
+==28364== 
+==28364== 1 errors in context 4 of 14:
+==28364== Invalid read of size 1
+==28364==    at 0x483EC52: strcat (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==28364==    by 0x109C2E: make_http_request (client.c:178)
+==28364==    by 0x10A1B1: main (client.c:268)
+==28364==  Address 0x4a4924b is 0 bytes after a block of size 11 alloc'd
+==28364==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==28364==    by 0x109957: http_parsing (client.c:116)
+==28364==    by 0x10A1A5: main (client.c:266)
+==28364== 
+==28364== 
+==28364== 1 errors in context 5 of 14:
+==28364== Use of uninitialised value of size 8
+==28364==    at 0x48881F7: tolower (ctype.c:46)
+==28364==    by 0x48881F7: tolower (ctype.c:44)
+==28364==    by 0x483F864: strcasecmp (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==28364==    by 0x4E4DCB3: ???
+==28364==    by 0x4E4E8D9: ???
+==28364==    by 0x4E4E913: ???
+==28364==    by 0x498520D: gethostbyname_r@@GLIBC_2.2.5 (getXXbyYY_r.c:315)
+==28364==    by 0x4984718: gethostbyname (getXXbyYY.c:135)
+==28364==    by 0x109B3F: make_http_request (client.c:159)
+==28364==    by 0x10A1B1: main (client.c:268)
+==28364==  Uninitialised value was created by a heap allocation
+==28364==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==28364==    by 0x10971B: http_parsing (client.c:84)
+==28364==    by 0x10A1A5: main (client.c:266)
+==28364== 
+==28364== 
+==28364== 1 errors in context 6 of 14:
+==28364== Conditional jump or move depends on uninitialised value(s)
+==28364==    at 0x48881E3: tolower (ctype.c:46)
+==28364==    by 0x483F864: strcasecmp (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==28364==    by 0x4E4DCB3: ???
+==28364==    by 0x4E4E8D9: ???
+==28364==    by 0x4E4E913: ???
+==28364==    by 0x498520D: gethostbyname_r@@GLIBC_2.2.5 (getXXbyYY_r.c:315)
+==28364==    by 0x4984718: gethostbyname (getXXbyYY.c:135)
+==28364==    by 0x109B3F: make_http_request (client.c:159)
+==28364==    by 0x10A1B1: main (client.c:268)
+==28364==  Uninitialised value was created by a heap allocation
+==28364==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==28364==    by 0x10971B: http_parsing (client.c:84)
+==28364==    by 0x10A1A5: main (client.c:266)
+==28364== 
+==28364== 
+==28364== 1 errors in context 7 of 14:
+==28364== Use of uninitialised value of size 8
+==28364==    at 0x48881F7: tolower (ctype.c:46)
+==28364==    by 0x48881F7: tolower (ctype.c:44)
+==28364==    by 0x483F864: strcasecmp (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==28364==    by 0x4E4E816: ???
+==28364==    by 0x4E4E913: ???
+==28364==    by 0x498520D: gethostbyname_r@@GLIBC_2.2.5 (getXXbyYY_r.c:315)
+==28364==    by 0x4984718: gethostbyname (getXXbyYY.c:135)
+==28364==    by 0x109B3F: make_http_request (client.c:159)
+==28364==    by 0x10A1B1: main (client.c:268)
+==28364==  Uninitialised value was created by a heap allocation
+==28364==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==28364==    by 0x10971B: http_parsing (client.c:84)
+==28364==    by 0x10A1A5: main (client.c:266)
+==28364== 
+==28364== 
+==28364== 1 errors in context 8 of 14:
+==28364== Conditional jump or move depends on uninitialised value(s)
+==28364==    at 0x48881E3: tolower (ctype.c:46)
+==28364==    by 0x483F864: strcasecmp (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==28364==    by 0x4E4E816: ???
+==28364==    by 0x4E4E913: ???
+==28364==    by 0x498520D: gethostbyname_r@@GLIBC_2.2.5 (getXXbyYY_r.c:315)
+==28364==    by 0x4984718: gethostbyname (getXXbyYY.c:135)
+==28364==    by 0x109B3F: make_http_request (client.c:159)
+==28364==    by 0x10A1B1: main (client.c:268)
+==28364==  Uninitialised value was created by a heap allocation
+==28364==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==28364==    by 0x10971B: http_parsing (client.c:84)
+==28364==    by 0x10A1A5: main (client.c:266)
+==28364== 
+==28364== 
+==28364== 1 errors in context 9 of 14:
+==28364== Conditional jump or move depends on uninitialised value(s)
+==28364==    at 0x483EF58: strlen (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==28364==    by 0x49AD9B8: __nscd_gethostbyname_r (nscd_gethst_r.c:43)
+==28364==    by 0x498557A: gethostbyname_r@@GLIBC_2.2.5 (getXXbyYY_r.c:255)
+==28364==    by 0x4984718: gethostbyname (getXXbyYY.c:135)
+==28364==    by 0x109B3F: make_http_request (client.c:159)
+==28364==    by 0x10A1B1: main (client.c:268)
+==28364==  Uninitialised value was created by a heap allocation
+==28364==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==28364==    by 0x10971B: http_parsing (client.c:84)
+==28364==    by 0x10A1A5: main (client.c:266)
+==28364== 
+==28364== 
+==28364== 1 errors in context 10 of 14:
+==28364== Invalid write of size 1
+==28364==    at 0x48D90FE: __vsprintf_internal (iovsprintf.c:97)
+==28364==    by 0x48B5EC7: sprintf (sprintf.c:30)
+==28364==    by 0x1099A2: http_parsing (client.c:117)
+==28364==    by 0x10A1A5: main (client.c:266)
+==28364==  Address 0x4a4924b is 0 bytes after a block of size 11 alloc'd
+==28364==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==28364==    by 0x109957: http_parsing (client.c:116)
+==28364==    by 0x10A1A5: main (client.c:266)
+==28364== 
+==28364== 
+==28364== 1 errors in context 11 of 14:
+==28364== Invalid write of size 1
+==28364==    at 0x1097F7: http_parsing (client.c:98)
+==28364==    by 0x10A1A5: main (client.c:266)
+==28364==  Address 0x4a491cf is 1 bytes before a block of size 34 alloc'd
+==28364==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==28364==    by 0x10971B: http_parsing (client.c:84)
+==28364==    by 0x10A1A5: main (client.c:266)
+==28364== 
+==28364== 
+==28364== 1 errors in context 12 of 14:
+==28364== Conditional jump or move depends on uninitialised value(s)
+==28364==    at 0x483EC37: strcat (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==28364==    by 0x109685: http_parsing (client.c:72)
+==28364==    by 0x10A1A5: main (client.c:266)
+==28364==  Uninitialised value was created by a heap allocation
+==28364==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==28364==    by 0x10961B: http_parsing (client.c:66)
+==28364==    by 0x10A1A5: main (client.c:266)
+==28364== 
+==28364== 
+==28364== 1 errors in context 13 of 14:
+==28364== Conditional jump or move depends on uninitialised value(s)
+==28364==    at 0x483EDED: strncat (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==28364==    by 0x109571: http_parsing (client.c:54)
+==28364==    by 0x10A1A5: main (client.c:266)
+==28364==  Uninitialised value was created by a heap allocation
+==28364==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==28364==    by 0x109536: http_parsing (client.c:53)
+==28364==    by 0x10A1A5: main (client.c:266)
+==28364== 
+==28364== ERROR SUMMARY: 14 errors from 14 contexts (suppressed: 0 from 0)

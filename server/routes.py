@@ -12,7 +12,7 @@ def get_request():
     new_get = dict()
     new_get['date'] = datetime.datetime.now().ctime()
     new_get['title'] = "Get Request has been received"
-    new_get['path'] = "http://localhost:5000/get"
+    new_get['path'] = "http://127.0.0.1:5000/get"
     new_get['body'] = ''
     posts.append(new_get)
 

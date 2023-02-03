@@ -1,0 +1,51 @@
+client.c: In function ‘client_init’:
+client.c:18:15: warning: statement with no effect [-Wunused-value]
+   18 |     new_client->parameters_of_r;
+      |     ~~~~~~~~~~^~~~~~~~~~~~~~~~~
+client.c:20:15: warning: statement with no effect [-Wunused-value]
+   20 |     new_client->path;
+      |     ~~~~~~~~~~^~~~~~
+client.c:21:15: warning: statement with no effect [-Wunused-value]
+   21 |     new_client->port;
+      |     ~~~~~~~~~~^~~~~~
+client.c:22:15: warning: statement with no effect [-Wunused-value]
+   22 |     new_client->url;
+      |     ~~~~~~~~~~^~~~~
+client.c:23:15: warning: statement with no effect [-Wunused-value]
+   23 |     new_client->text;
+      |     ~~~~~~~~~~^~~~~~
+client.c: In function ‘http_parsing’:
+client.c:115:37: warning: unused variable ‘counter’ [-Wunused-variable]
+  115 |                                 int counter = 0;
+      |                                     ^~~~~~~
+client.c:34:9: warning: variable ‘malloc_url’ set but not used [-Wunused-but-set-variable]
+   34 |     int malloc_url = 0;
+      |         ^~~~~~~~~~
+client.c: In function ‘make_http_request’:
+client.c:158:53: warning: statement with no effect [-Wunused-value]
+  158 |     if(new_client->parameters_of_r!=NULL)size_of_buf+2;
+      |                                          ~~~~~~~~~~~^~
+client.c:206:9: warning: implicit declaration of function ‘write’; did you mean ‘fwrite’? [-Wimplicit-function-declaration]
+  206 |         write(fd,buffer,size_of_buf);
+      |         ^~~~~
+      |         fwrite
+client.c:196:14: warning: unused variable ‘text_length’ [-Wunused-variable]
+  196 |         char text_length[size_of_text_length+1];
+      |              ^~~~~~~~~~~
+client.c:194:13: warning: unused variable ‘text_length_integer’ [-Wunused-variable]
+  194 |         int text_length_integer = new_client->text_length;
+      |             ^~~~~~~~~~~~~~~~~~~
+client.c:223:24: warning: implicit declaration of function ‘read’; did you mean ‘fread’? [-Wimplicit-function-declaration]
+  223 |     while ((read_now = read(fd,buffer_to_read,511))>0)
+      |                        ^~~~
+      |                        fread
+client.c:155:9: warning: unused variable ‘flag_p’ [-Wunused-variable]
+  155 |     int flag_p = 0;
+      |         ^~~~~~
+client.c:152:9: warning: unused variable ‘nbytes’ [-Wunused-variable]
+  152 |     int nbytes;
+      |         ^~~~~~
+client.c: In function ‘http_parsing’:
+client.c:45:17: warning: ‘error_messeage’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+   45 |                 sprintf(error_messeage,"kkkk[%d] is NULL",i);
+      |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

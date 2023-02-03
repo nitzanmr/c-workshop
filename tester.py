@@ -7,7 +7,7 @@ from prettytable import PrettyTable
 
 
 EXECUTABLE = "ex2"
-C_FILES = "*.c"
+C_FILES = "client.c"
 SERVER_PROC = None
 
 
@@ -112,6 +112,7 @@ def life_cycle():
                 b'\r\nContent-Length:24\r\n\r\nfull8functionality8check']
 
     printf1 = [b'HTTP request =\n' + req + b'\n' + b'LEN = ' + str(len(req)).encode() for req in requests]
+    # print(printf1)
     printf2 = b'Total received response bytes: ' + str(len(expected) + OK200_end - OK200_start).encode()
 
     with open("db.json", "r") as db_file:
@@ -120,30 +121,39 @@ def life_cycle():
     received = requests_wall[-1]
 
     if received['body'] != 'full8functionality8check':
+        print("<1>\n")
         return False
 
     if not received.get('c_len'):
+        print("<2>\n")
         return False
 
     if int(received['c_len']) != len('full8functionality8check'):
+        print("<3>\n")
         return False
 
     if not received.get('params'):
+        print("<4>\n")
         return False
 
     if ''.join(received['params'].values()) != 'ParameterWithLongName':
+        print("<5>\n")
         return False
 
     if not any(pr1.lower() in content.lower() for pr1 in printf1):
+        print("<6>\n")
         return False
 
     if expected not in content:
+        print("<7>\n")
         return False
 
     if printf2 not in content:
+        print("<8>\n")
         return False
 
     if client_proc.returncode != 0:
+        printf("<9>\n")
         return False
 
     return True
@@ -344,7 +354,7 @@ def setup():
 
     with open("stdout_compilation.txt", 'w') as out_file:
         c = subprocess.run(
-            f'gcc -Wall {C_FILES} -o {EXECUTABLE}',
+            f'gcc -g -Wall {C_FILES} -o {EXECUTABLE}',
             stderr=out_file,
             stdout=out_file,
             shell=True,
@@ -398,5 +408,3 @@ if __name__ == "__main__":
 
     req = requests.get(f'http://localhost:5000/puzzle?usage={t_usage}&structure={t_structure}&get={t_get}&pdf={t_pdf}&'
                        f'post={t_post}&params={t_params}&life_cycle={t_life_cycle}&valgrind={t_valgrind}')
-
-

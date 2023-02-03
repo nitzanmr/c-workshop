@@ -1,0 +1,149 @@
+HTTP request =
+POST /post HTTP/1.0
+HOST: localhost
+Content-length: 1004
+
+Cross8Site8Scripting8XSS8attacks8are8a8type8of8injection8in8which8malicious8scripts8are8injected8into8otherwise8benign8and8trusted8websites18XSS8attacks8occur8when8an8attacker8uses8a8web8application8to8send8malicious8code8generally8in8the8form8of8a8browser8side8script8to8a8different8end8user18Flaws8that8allow8these8attacks8to8succeed8are8quite8widespread8and8occur8anywhere8a8web8application8uses8input8from8a8user8within8the8output8it8generates8without8validating8or8encoding8it18An8attacker8can8use8XSS8to8send8a8malicious8script8to8an8unsuspecting8user18The8end8users8browser8has8no8way8to8know8that8the8script8should8not8be8trusted8and8will8execute8the8script18Because8it8thinks8the8script8came8from8a8trusted8source8the8malicious8script8can8access8any8cookies8session8tokens8or8other8sensitive8information8retained8by8the8browser8and8used8with8that8site18These8scripts8can8even8rewrite8the8content8of8the8HTML8page18Can8you8think8of8a8simple8way8to8compromise8EX2server8to8execute8additional8code3
+LEN = 1066
+HTTP/1.1 200 OK
+Server: Werkzeug/2.2.2 Python/3.10.4
+Date: Fri, 03 Feb 2023 14:01:46 GMT
+Content-Type: text/html; charset=utf-8
+Content-Length: 6317
+Connection: close
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="refresh" , content="5"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/static/main.css">
+    <title>Ex2 Tester</title>
+</head>
+<body>
+
+<header class="site-header">
+    <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+        <div class="container">
+            <a class="navbar-brand mr-4" href="/">Ex2 Request Checker</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle"
+                    aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarToggle">
+                <div class="navbar-nav mr-auto">
+                </div>
+                <!-- Navbar Right Side -->
+                <div class="navbar-nav">
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main role="main" class="container">
+    <div class="row">
+        <div class="col-md-8">
+            
+            
+            <article class="media content-section">
+                <div class="media-body">
+                    <div class="article-metadata">
+                        <a class="mr-2">Fri Feb  3 14:01:46 2023</a>
+                        <small class="text-muted">#</small>
+                    </div>
+                    <h4 class="article-title text-muted">Requests Wall</h4>
+                    <p class="article-content text-muted"></p>
+                    
+                    
+                </div>
+            </article>
+            
+            
+            
+            <article class="media content-section">
+                <div class="media-body">
+                    <div class="article-metadata">
+                        <a class="mr-2">Fri Feb  3 14:01:46 2023</a>
+                        <small class="text-muted">http://127.0.0.1:5000/get</small>
+                    </div>
+                    <h4 class="article-title text-muted">Get Request has been received</h4>
+                    <p class="article-content text-muted"></p>
+                    
+                    
+                </div>
+            </article>
+            
+            
+            
+            <article class="media content-section">
+                <div class="media-body">
+                    <div class="article-metadata">
+                        <a class="mr-2">Fri Feb  3 14:01:46 2023</a>
+                        <small class="text-muted">http://localhost:5000/pdf</small>
+                    </div>
+                    <h4 class="article-title text-muted">Get Request has been received</h4>
+                    <p class="article-content text-muted"></p>
+                    
+                    
+                </div>
+            </article>
+            
+            
+            
+            <article class="media content-section">
+                <div class="media-body">
+                    <div class="article-metadata">
+                        <a class="mr-2">Fri Feb  3 14:01:46 2023</a>
+                        <small class="text-muted">http://localhost:5000/post</small>
+                    </div>
+                    <h4 class="article-title text-muted">Post Request has been received</h4>
+                    <p class="article-content text-muted">Cross8Site8Scripting8XSS8attacks8are8a8type8of8injection8in8which8malicious8scripts8are8injected8into8otherwise8benign8and8trusted8websites18XSS8attacks8occur8when8an8attacker8uses8a8web8application8to8send8malicious8code8generally8in8the8form8of8a8browser8side8script8to8a8different8end8user18Flaws8that8allow8these8attacks8to8succeed8are8quite8widespread8and8occur8anywhere8a8web8application8uses8input8from8a8user8within8the8output8it8generates8without8validating8or8encoding8it18An8attacker8can8use8XSS8to8send8a8malicious8script8to8an8unsuspecting8user18The8end8users8browser8has8no8way8to8know8that8the8script8should8not8be8trusted8and8will8execute8the8script18Because8it8thinks8the8script8came8from8a8trusted8source8the8malicious8script8can8access8any8cookies8session8tokens8or8other8sensitive8information8retained8by8the8browser8and8used8with8that8site18These8scripts8can8even8rewrite8the8content8of8the8HTML8page18Can8you8think8of8a8simple8way8to8compromise8EX2server8to8execute8additional8code3</p>
+                    
+                    <p class="article-content">Content-Length: 1004</p>
+                    
+                    
+                </div>
+            </article>
+            
+            
+        </div>
+        <div class="col-md-4">
+            <div class="content-section">
+                <h3>Notes</h3>
+                <p class='text-muted'>Send an HTTP request with one of the paths below to post it on the wall.
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-light">/get</li>
+                    <li class="list-group-item list-group-item-light">/get_params</li>
+                    <li class="list-group-item list-group-item-light">/post</li>
+                    <li class="list-group-item list-group-item-light">/pdf</li>
+                    <li class="list-group-item list-group-item-light">/life_cycle</li>
+                </ul>
+                </p>
+            </div>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+        </div>
+    </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
+        integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
+        crossorigin="anonymous"></script>
+</body>
+</html>
+ Total received response bytes: 6492
