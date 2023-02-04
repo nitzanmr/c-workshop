@@ -335,6 +335,7 @@ def usage():
         try:
             content = output.read()
             if content[:6].lower() != "usage:":
+                print("<1>\n")
                 return False
 
         except UnicodeDecodeError:

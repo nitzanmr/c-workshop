@@ -1,0 +1,1 @@
+Usage: client [-p n <text>] [-r n < pr1=value1pr2=value2 …>] <URL>
